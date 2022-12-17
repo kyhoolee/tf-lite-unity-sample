@@ -19,9 +19,6 @@ public sealed class FaceMeshSample : MonoBehaviour
     private RawImage cameraView = null;
 
     [SerializeField]
-    private RawImage croppedView = null;
-
-    [SerializeField]
     private Material faceMaterial = null;
 
     private FaceDetect faceDetect;
@@ -86,7 +83,6 @@ public sealed class FaceMeshSample : MonoBehaviour
         }
 
         faceMesh.Invoke(texture, detectionResult);
-        croppedView.texture = faceMesh.inputTex;
         meshResult = faceMesh.GetResult();
 
         if (meshResult.score < 0.5f)

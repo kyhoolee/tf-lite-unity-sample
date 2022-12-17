@@ -47,6 +47,7 @@ ExportedObj/
 *.opendb
 *.VC.db
 
+*.vscode
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
@@ -62,5 +63,14 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+
+# 
+sample_BackUpThisFolder_ButDontShipItWithYourGame/
+sample_BurstDebugInformation_DoNotShip/
+
+# 
+**.meta
+**UserSettings
+**ProjectSettings
 
 
