@@ -849,6 +849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 806440793}
   - component: {fileID: 806440792}
+  - component: {fileID: 806440794}
   m_Layer: 0
   m_Name: Recorder
   m_TagString: Untagged
@@ -870,15 +871,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   format: 0
   destination: 1
-  videoMode: 2
+  videoMode: 1
   audioMode: 0
   resolution: 1
-  orientation: 0
+  orientation: 2
   aspect: 0
   cameras:
   - {fileID: 32141216}
   texture: {fileID: 0}
-  cameraManager: {fileID: 0}
+  cameraManager: {fileID: 806440794}
   OnRecordingCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -904,6 +905,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &806440794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806440791}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98622613d505143a9a06b4b11b0a82cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolution: 3
+  capabilities: 0
+  playOnAwake: 1
+  focusMode: 0
+  exposureMode: 0
+  OnFrame:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &922666480
 PrefabInstance:
   m_ObjectHideFlags: 0
