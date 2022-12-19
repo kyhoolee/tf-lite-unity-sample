@@ -69,8 +69,11 @@ sample_BackUpThisFolder_ButDontShipItWithYourGame/
 sample_BurstDebugInformation_DoNotShip/
 
 # 
-**.meta
+# **.meta
 # **UserSettings
 # **ProjectSettings
+
+**VideoKit
+**.mp4
 
 
