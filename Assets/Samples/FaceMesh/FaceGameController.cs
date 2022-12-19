@@ -17,12 +17,12 @@ public class FaceGameController : MonoBehaviour
 
     void DisableText()
     {
-        scoreText.enabled = false; ////.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
     }
 
     void ChangeScore(int score)
     {   
-        scoreText.enabled = true; ////.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);   
 
         if (score == 1)
         {
@@ -43,12 +43,12 @@ public class FaceGameController : MonoBehaviour
     {   // get lastest note to check press
         // if note is out of board to check next note
 
-        FaceNoteMovement currentNote = player.GetNoteMovement();
-        if (currentNote != null 
-        && currentNote.GetPostion().y < bottomRight.transform.position.y)
-        {
-            player.NextNote();
-        }
+        // FaceNoteMovement currentNote = player.GetNoteMovement();
+        // if (currentNote != null 
+        // && currentNote.GetPostion().y < bottomRight.transform.position.y)
+        // {
+        //     player.NextNote();
+        // }
 
 
         //if(player.GetNoteMovement() != null)
@@ -96,6 +96,7 @@ public class FaceGameController : MonoBehaviour
         {
         case 0:
             // down
+            Debug.Log("0");
             break;
         case 1:
             // left

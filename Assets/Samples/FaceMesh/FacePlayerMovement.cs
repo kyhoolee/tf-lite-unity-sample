@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public class FacePlayerMovement : MonoBehaviour
-{   
+{
     public FaceGameController gameController;
     public float timeNote = -1.0f;
     // make queue to check note following order
@@ -22,8 +22,7 @@ public class FacePlayerMovement : MonoBehaviour
     public void NextNote()
     {
         if (q.Count > 0)
-        {   
-            Destroy(q.Peek().gameObject, 0f);
+        {
             q.Dequeue();
         }
     }

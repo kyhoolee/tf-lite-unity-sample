@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FaceGenerate : MonoBehaviour
 {
@@ -6,53 +7,84 @@ public class FaceGenerate : MonoBehaviour
     public GameObject faceNotePrefab;
     private FaceNoteMovement note;
     int i = 0;
+    public bool gen = false;
 
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
+    Vector3 tL;
+    Vector3 bR;
+    float posRange;
+    Vector3 generatePos;
+    public int number_notes = 5;
+    [SerializeField] List<GameObject> pooledNotes;
 
+    public float timeStartGenerate = 0f;
+    public float spawnTimeRange = 1f;
 
-    public bool gen = false;
-    float timeStartGenerate = 3f;
-    float spawnTimeRange = 3f;
+    void Awake()
+    {   
+        // 1. Get game-region size 
+        tL = topLeft.transform.position;
+        bR = bottomRight.transform.position;
+
+        posRange = (bR.x - tL.x) / 2;
+        generatePos = new Vector3(tL.x + posRange, tL.y, 0);
+        // create pool notes
+        pooledNotes = new List<GameObject>();
+        for (int i = 0; i < number_notes; i++)
+        {
+            pooledNotes.Add(CreateNote());
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        if (!gen)
-        {
-            InvokeRepeating(nameof(CreateNote), timeStartGenerate, spawnTimeRange);
-            gen = true;
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        
+    {
+
     }
 
-    void CreateNote()
+    void FixedUpdate()
+    {   
+        // after spawnTimeRange second, we get note in pool to spawn
+        timeStartGenerate += Time.deltaTime;
+        if (timeStartGenerate > spawnTimeRange)
+        {
+            timeStartGenerate = 0f;
+            Spawn();
+        }
+    }
+
+    GameObject Spawn()
     {
-        // 1. Get game-region size 
-        Vector3 tL = topLeft.transform.position;
-        Vector3 bR = bottomRight.transform.position;
+        for (int i = 0; i < pooledNotes.Count; i++)
+        {
+            if (!pooledNotes[i].activeSelf)
+            {   
+                // 1. when reactive, rerandom position and spirit
+                pooledNotes[i].GetComponent<FaceNoteMovement>().RandomOnReset(posRange, generatePos);
+                // gameController.player.AddNoteMovement(pooledNotes[i].GetComponent<FaceNoteMovement>());
+                pooledNotes[i].SetActive(true);
+                return pooledNotes[i];
+            }
+        }
+        return null;
+    }
 
-        float posRange = (bR.x - tL.x)/2;
-        Vector3 generatePos = new Vector3(tL.x + posRange, tL.y, 0);
-
+    GameObject CreateNote()
+    {
         // 2. Generate note 
         var go = Instantiate(faceNotePrefab);
-        note=go.GetComponent<FaceNoteMovement>();
+        note = go.GetComponent<FaceNoteMovement>();
         note.gameObject.name = (i + 1).ToString();
-        note.gameObject.transform.localPosition = 
-            new Vector3(
-                Random.Range(-posRange, posRange), 0f, 1f) 
-            + generatePos;
-        gameController.player.AddNoteMovement(note);
+        note.RandomOnReset(posRange, generatePos);
         i++;
-    }
-
-    void DestroyNote(GameObject note)
-    {
-        Destroy(note.gameObject);
+        go.SetActive(false);
+        return go;
     }
 }
