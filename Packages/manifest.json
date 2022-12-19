@@ -6,9 +6,15 @@
       "scopes": [
         "com.github.asus4"
       ]
+    },
+    {
+      "name": "NatML",
+      "url": "https://registry.npmjs.com",
+      "scopes": ["ai.natml"]
     }
   ],
   "dependencies": {
+    "ai.natml.videokit": "0.0.5",
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.3.1",
     "com.github.asus4.texture-source": "0.1.2",
     "com.unity.2d.sprite": "1.0.0",
