@@ -13,7 +13,9 @@ public class FaceGameController : MonoBehaviour
     [SerializeField] private FaceMeshProcessor faceMeshProcess;
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
-
+    [SerializeField] private RectTransform ready;
+    public bool isGenerate = false;
+    [SerializeField] private FaceGenerate faceGenerate;
 
     void DisableText()
     {
@@ -23,37 +25,24 @@ public class FaceGameController : MonoBehaviour
     void ChangeScore(int score)
     {   
         scoreText.gameObject.SetActive(true);   
-
-        if (score == 1)
-        {
-            scoreText.text = "Perfect";
-        }
-        else if (score == 2)
-        {
-            scoreText.text = "Good";
-        } else
-        {
-            scoreText.text = "Miss";
-        }
+        // Update score
 
         Invoke(nameof(DisableText), 0.5f);
     }
 
+    void ReadyDone(){
+        ready.gameObject.SetActive(false);
+        isGenerate = true;
+    }
+
+    void Start(){
+        Invoke(nameof(ReadyDone), 3.0f);
+    }
+
     private void FixedUpdate()
-    {   // get lastest note to check press
-        // if note is out of board to check next note
-
-        // FaceNoteMovement currentNote = player.GetNoteMovement();
-        // if (currentNote != null 
-        // && currentNote.GetPostion().y < bottomRight.transform.position.y)
-        // {
-        //     player.NextNote();
-        // }
-
-
-        //if(player.GetNoteMovement() != null)
-        //    Debug.Log(player.GetNoteMovement().GetZ());
-        // get input time
+    {   
+        faceGenerate.gameObject.SetActive(isGenerate);
+        
         // get press space time
         if (Time.time > timeSpace) // Input.GetMouseButtonDown(0) && 
         {
@@ -96,7 +85,6 @@ public class FaceGameController : MonoBehaviour
         {
         case 0:
             // down
-            Debug.Log("0");
             break;
         case 1:
             // left

@@ -51,9 +51,11 @@ public class FaceNoteMovement : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-
+    /*
+    replace and reset spirit for note when it is reactive
+    */
     public void RandomOnReset(float posRange, Vector3 generatePos)
-    {
+    {   
         this.gameObject.transform.localPosition =
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
