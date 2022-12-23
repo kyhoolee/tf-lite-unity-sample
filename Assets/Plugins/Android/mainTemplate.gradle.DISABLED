@@ -14,6 +14,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    // packagingOptions {
+    //     pickFirst '**/*.so'
+    // }
+
     defaultConfig {
         minSdkVersion **MINSDKVERSION**
         targetSdkVersion **TARGETSDKVERSION**
@@ -23,6 +27,7 @@ android {
         versionCode **VERSIONCODE**
         versionName '**VERSIONNAME**'
         consumerProguardFiles 'proguard-unity.txt'**USER_PROGUARD**
+                multiDexEnabled true
     }
 
     lintOptions {

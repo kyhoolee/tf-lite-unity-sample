@@ -15,6 +15,10 @@ allprojects {
         }
     }
 
+    // packagingOptions {
+    //     pickFirst '**/*.so'
+    // }
+
     repositories {**ARTIFACTORYREPOSITORY**
         google()
         jcenter()

@@ -46,7 +46,7 @@ public class FaceNoteMovement : MonoBehaviour
         rb.AddForce(-forwardForce * Time.deltaTime);
     }
 
-    public Vector3 GetPostion()
+    public Vector3 GetPosition()
     {
         return gameObject.transform.position;
     }

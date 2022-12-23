@@ -22,7 +22,12 @@ android {
         }
         versionCode **VERSIONCODE**
         versionName '**VERSIONNAME**'
+                multiDexEnabled true
     }
+
+    packagingOptions {
+        pickFirst '**/*.so'
+    }    
 
     aaptOptions {
         noCompress = **BUILTIN_NOCOMPRESS** + unityStreamingAssets.tokenize(', ')

@@ -44,8 +44,20 @@ public class FaceGameController : MonoBehaviour
         // if note is out of board to check next note
 
         FaceNoteMovement currentNote = player.GetNoteMovement();
-        if (currentNote != null 
-        && currentNote.GetPostion().y < bottomRight.transform.position.y)
+        if(currentNote != null) {
+            var nP = currentNote.GetPosition();
+            var tL = topLeft.transform.position;
+            var bR = bottomRight.transform.position;
+            Debug.Log(
+                "Current-note:: " + currentNote.gameObject.name
+                + "( " + nP.x + " " + nP.y + " " + nP.z + " )"
+                + "\nBorder:: " 
+                + "( " + tL.x + " " + tL.y + " " + tL.z + " )"
+                + " -- " 
+                + "( " + bR.x + " " + bR.y + " " + bR.z + " )"
+                );
+        }
+        if (currentNote != null && currentNote.GetPosition().y < bottomRight.transform.position.y)
         {
             player.NextNote();
         }

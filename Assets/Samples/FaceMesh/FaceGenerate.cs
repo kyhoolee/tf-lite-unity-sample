@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class FaceGenerate : MonoBehaviour
@@ -10,19 +11,18 @@ public class FaceGenerate : MonoBehaviour
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
 
-
-    public bool gen = false;
     float timeStartGenerate = 3f;
     float spawnTimeRange = 3f;
     // Start is called before the first frame update
     void Start()
     {
-        if (!gen)
-        {
-            InvokeRepeating(nameof(CreateNote), timeStartGenerate, spawnTimeRange);
-            gen = true;
-        }
+        StartCoroutine(CreateNote());
     }
+
+    void stopGenerate() {
+        CancelInvoke();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -30,9 +30,10 @@ public class FaceGenerate : MonoBehaviour
         
     }
 
-    void CreateNote()
+    IEnumerator  CreateNote()
     {
-        // 1. Get game-region size 
+        while(true){
+            // 1. Get game-region size 
         Vector3 tL = topLeft.transform.position;
         Vector3 bR = bottomRight.transform.position;
 
@@ -41,6 +42,7 @@ public class FaceGenerate : MonoBehaviour
 
         // 2. Generate note 
         var go = Instantiate(faceNotePrefab);
+        Debug.Log(""+go.name, go);
         note=go.GetComponent<FaceNoteMovement>();
         note.gameObject.name = (i + 1).ToString();
         note.gameObject.transform.localPosition = 
@@ -49,6 +51,10 @@ public class FaceGenerate : MonoBehaviour
             + generatePos;
         gameController.player.AddNoteMovement(note);
         i++;
+
+        Debug.Log("Generate new note:: " + i + " :: " + note);
+        yield return new WaitForSeconds(spawnTimeRange);
+        }
     }
 
     void DestroyNote(GameObject note)
