@@ -7,7 +7,8 @@ public class FaceGameController : MonoBehaviour
 {
     float timeSpace = 0.00f;
     float logicTimeRange = 0.5f;
-    public FacePlayerMovement player;
+    [SerializeField] private FacePlayerMovement player;
+    public FacePlayerMovement Player { get => player; }
     public Text scoreText;
 
     [SerializeField] private FaceMeshProcessor faceMeshProcess;
@@ -23,42 +24,52 @@ public class FaceGameController : MonoBehaviour
     }
 
     void ChangeScore(int score)
-    {   
-        scoreText.gameObject.SetActive(true);   
+    {
+        scoreText.gameObject.SetActive(true);
         // Update score
 
         Invoke(nameof(DisableText), 0.5f);
     }
 
-    void ReadyDone(){
+    void ReadyDone()
+    {
         ready.gameObject.SetActive(false);
         isGenerate = true;
     }
 
-    void Start(){
-        Invoke(nameof(ReadyDone), 3.0f);
+    void Start()
+    {
+        //1. count 1 -> 3 to ready 
+        ready.gameObject.SetActive(true);
+        Invoke(nameof(ReadyDone), 5.0f);
     }
 
     private void FixedUpdate()
-    {   
+    {
         faceGenerate.gameObject.SetActive(isGenerate);
-        
+
         // get press space time
         if (Time.time > timeSpace) // Input.GetMouseButtonDown(0) && 
         {
             timeSpace = Time.time + logicTimeRange;
             FaceNoteMovement lastNode = player.GetNoteMovement();
             FaceMesh.Result faceMesh = faceMeshProcess.getFaceMeshResult();
-            if (faceMesh != null) 
+            if (faceMesh != null)
             {
-                if (lastNode != null)
+                if (faceMesh.score < 0)
                 {
-                    faceNoteMatch(lastNode, faceMesh); 
-                } else 
+                    scoreText.text = "No-face";
+                }
+                else if (lastNode != null)
+                {
+                    faceNoteMatch(lastNode, faceMesh);
+                }
+                else
                 {
                     //scoreText.text = "Next-note";
                 }
-            } else 
+            }
+            else
             {
                 scoreText.text = "No-face";
             }
@@ -66,49 +77,79 @@ public class FaceGameController : MonoBehaviour
 
     }
 
+    string BoolToString(bool b)
+    {
+        return (b) ? "T" : "F";
+    }
 
-    private bool faceNoteMatch(FaceNoteMovement note, FaceMesh.Result face) {
+    private bool faceNoteMatch(FaceNoteMovement note, FaceMesh.Result face)
+    {
         bool result = false;
 
         Vector2 angles = faceAngle(face);
+        Vector2 mouth = faceMouth(face);
 
-        bool isDown = (angles[1] < 170 && angles[1] > 0);
+        bool isDown = (angles[1] < 175 && angles[1] > 0);
         bool isUp = (angles[1] > -160 && angles[1] < 0);
         bool isLeft = (angles[0] > -160 && angles[0] < 0);
-        bool isRight = (angles[0] < 160 && angles[0] > 0);
+        bool isRight = (angles[0] < 175 && angles[0] > 0);
 
-        bool isStraight = Mathf.Abs(angles[0]) > 170 && Mathf.Abs(angles[1]) > 170;
+        bool isStraight = Mathf.Abs(angles[0]) > 175 && Mathf.Abs(angles[1]) > 175;
 
-
-
-        switch(note.noteType) 
+        scoreText.text = mouth[0] + " | " + mouth[1];
+        /*
+        0: down         - T F F F F
+        1: right        - F F T F F 
+        2: mouth open   - 
+        3: left          - F F F T F
+        4: up           - F T F F F
+        ** note: left and right of player is inveresed
+        */
+        // Debug.Log("D U L R S: " + isDown + " " + isUp + " " + isLeft + " " + isRight + " " + isStraight);
+        string faceState = BoolToString(isDown) + BoolToString(isUp) + BoolToString(isLeft) + BoolToString(isRight) + BoolToString(isStraight);
+        Debug.Log(faceState);
+        int faceNoteType = -1;
+        switch (faceState)
         {
-        case 0:
-            // down
-            break;
-        case 1:
-            // left
-            break;
-        case 2:
-            // mouth
-            break;
-        case 3:
-            // right
-            break;
-        case 4:
-            // up
-            break;
-        default:
-            // not defined
-            break;
+            case "TFFFF":
+                // down
+                Debug.Log("down");
+                faceNoteType = 0;
+                break;
+            case "FFTFF":
+                // left
+                Debug.Log("left");
+                faceNoteType = 3;
+                break;
+            case "":
+                // mouth
+                break;
+            case "FFFTF":
+                // right
+                Debug.Log("right");
+                faceNoteType = 1;
+                break;
+            case "FTFFF":
+                // up
+                Debug.Log("up");
+                faceNoteType = 4;
+                break;
+            default:
+                // not defined
+                break;
+        }
+
+        if(note.noteType == faceNoteType){
+            note.IsDone();
         }
 
         return result;
     }
 
 
-    private Vector2 faceAngle(FaceMesh.Result face) {
-        
+    private Vector2 faceAngle(FaceMesh.Result face)
+    {
+
 
         Vector3 center = face.keypoints[6];
         Vector3 left = face.keypoints[226];
@@ -129,14 +170,15 @@ public class FaceGameController : MonoBehaviour
     }
 
 
-    private Vector2 faceMouth(FaceMesh.Result face) {
-        
+    private Vector2 faceMouth(FaceMesh.Result face)
+    {
+
 
         Vector3 center = face.keypoints[6];
-        Vector3 left = face.keypoints[226];
-        Vector3 right = face.keypoints[446];
-        Vector3 up = face.keypoints[151];
-        Vector3 down = face.keypoints[164];
+        Vector3 left = face.keypoints[287];
+        Vector3 right = face.keypoints[57];
+        Vector3 up = face.keypoints[13];
+        Vector3 down = face.keypoints[14];
 
         Vector3 leftRight = right - left;
         Vector3 downUp = up - down;
@@ -150,7 +192,7 @@ public class FaceGameController : MonoBehaviour
         return new Vector2(xzAngle, yzAngle);
     }
 
-    
+
 
 
 }

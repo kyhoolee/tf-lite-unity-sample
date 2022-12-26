@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class FacePlayerMovement : MonoBehaviour
 {
-    public FaceGameController gameController;
+    [SerializeField] private FaceGameController gameController;
     public float timeNote = -1.0f;
     // make queue to check note following order
     Queue<FaceNoteMovement> q = new Queue<FaceNoteMovement>();
 
     public void AddNoteMovement(FaceNoteMovement noteMovement)
     {
+        // Debug.Log(noteMovement.gameObject.name + " enqueue");
         q.Enqueue(noteMovement);
     }
 
@@ -23,6 +24,7 @@ public class FacePlayerMovement : MonoBehaviour
     {
         if (q.Count > 0)
         {
+            // Debug.Log(q.Dequeue().gameObject.name + " dequeue");
             q.Dequeue();
         }
     }

@@ -212,8 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4429b3c0b0905984aa83064bb5da783b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardForce: {x: 0, y: 100, z: 0}
-  player: {fileID: 0}
+  forwardForce: {x: 0, y: 50, z: 0}
+  player: {fileID: 5371018266040593325, guid: b829ca8a2e36da14ca826d7c60945d5a, type: 3}
+  state: 0
   arrSprite:
   - {fileID: 21300000, guid: 53bea12862828c24ab7cfa0aac12edf1, type: 3}
   - {fileID: 21300000, guid: 9c863b1763186fa4283215a2e9981bc1, type: 3}

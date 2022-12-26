@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class FaceGenerate : MonoBehaviour
 {
-    public FaceGameController gameController;
-    public GameObject faceNotePrefab;
+    [SerializeField] private FaceGameController gameController;
+    [SerializeField] private GameObject faceNotePrefab;
     private FaceNoteMovement note;
     int i = 0;
     public bool gen = false;
@@ -22,7 +22,7 @@ public class FaceGenerate : MonoBehaviour
     public float spawnTimeRange = 1f;
 
     void Awake()
-    {   
+    {
         // 1. Get game-region size 
         tL = topLeft.transform.position;
         bR = bottomRight.transform.position;
@@ -40,7 +40,7 @@ public class FaceGenerate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -50,7 +50,7 @@ public class FaceGenerate : MonoBehaviour
     }
 
     void FixedUpdate()
-    {   
+    {
         // after spawnTimeRange second, we get note in pool to spawn
         timeStartGenerate += Time.deltaTime;
         if (timeStartGenerate > spawnTimeRange)
@@ -65,10 +65,10 @@ public class FaceGenerate : MonoBehaviour
         for (int i = 0; i < pooledNotes.Count; i++)
         {
             if (!pooledNotes[i].activeSelf)
-            {   
+            {
                 // 1. when reactive, rerandom position and spirit
                 pooledNotes[i].GetComponent<FaceNoteMovement>().RandomOnReset(posRange, generatePos);
-                // gameController.player.AddNoteMovement(pooledNotes[i].GetComponent<FaceNoteMovement>());
+                gameController.Player.AddNoteMovement(pooledNotes[i].GetComponent<FaceNoteMovement>());
                 pooledNotes[i].SetActive(true);
                 return pooledNotes[i];
             }
@@ -82,7 +82,7 @@ public class FaceGenerate : MonoBehaviour
         var go = Instantiate(faceNotePrefab);
         note = go.GetComponent<FaceNoteMovement>();
         note.gameObject.name = (i + 1).ToString();
-        note.RandomOnReset(posRange, generatePos);
+        note.Init(posRange, generatePos, gameController.Player);
         i++;
         go.SetActive(false);
         return go;
