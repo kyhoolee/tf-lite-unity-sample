@@ -5,7 +5,7 @@ public class FaceNoteMovement : MonoBehaviour
     private Rigidbody rb;
     public Vector3 forwardForce = new Vector3(0, 110f, 0);
     float positionYStart = 10f;
-    float positionYEnd = -5f;
+    float positionYEnd = -10f;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
     private SpriteRenderer spriteRenderer;
@@ -19,6 +19,7 @@ public class FaceNoteMovement : MonoBehaviour
     ** note: left and right of player is inveresed
     */
     public int noteType = -1;
+    int scoreType = 0;
     private void Awake()
     {
         // get object ridibody
@@ -79,12 +80,38 @@ public class FaceNoteMovement : MonoBehaviour
         return gameObject.transform.position;
     }
 
+    void DisableScore()
+    {
+        player.score[scoreType].gameObject.SetActive(false);
+    }
+
+    void DisableScoreAll()
+    {
+        for (int i = 0; i < 4; i++)
+            player.score[i].gameObject.SetActive(false);
+
+    }
+
     public void IsDone()
     {
         if (state == NoteState.Used)
         {
-            player.NextNote();
+            float posY = gameObject.transform.position.y;
+            if (posY >= 6f)
+            {
+                scoreType = 0;
+            }
+            else if (posY >= -3f && posY < 5f)
+            {
+                scoreType = 1;
+            }
+            else scoreType = 2;
+            DisableScoreAll();
+            player.score[scoreType].gameObject.SetActive(true);
+            Invoke(nameof(DisableScore), 1f);
             gameObject.SetActive(false);
+
+            player.NextNote();
         }
     }
 }

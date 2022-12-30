@@ -7,7 +7,6 @@ public class FaceGenerate : MonoBehaviour
     [SerializeField] private GameObject faceNotePrefab;
     private FaceNoteMovement note;
     int i = 0;
-    public bool gen = false;
 
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;

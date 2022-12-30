@@ -17,6 +17,8 @@ public class FaceGameController : MonoBehaviour
     [SerializeField] private RectTransform ready;
     public bool isGenerate = false;
     [SerializeField] private FaceGenerate faceGenerate;
+    float preH = -20;
+    float preW = -20;
 
     void DisableText()
     {
@@ -107,7 +109,7 @@ public class FaceGameController : MonoBehaviour
         */
         // Debug.Log("D U L R S: " + isDown + " " + isUp + " " + isLeft + " " + isRight + " " + isStraight);
         string faceState = BoolToString(isDown) + BoolToString(isUp) + BoolToString(isLeft) + BoolToString(isRight) + BoolToString(isStraight);
-        Debug.Log(faceState);
+        // Debug.Log(faceState);
         int faceNoteType = -1;
         switch (faceState)
         {
@@ -121,8 +123,15 @@ public class FaceGameController : MonoBehaviour
                 Debug.Log("left");
                 faceNoteType = 3;
                 break;
-            case "":
+            case "FFFFT":
+                // straight
+                // Debug.Log("straight");
                 // mouth
+                if (mouth[0] > 2 && mouth[1] < 1)
+                {
+                    Debug.Log("open mouth");
+                    faceNoteType = 2;
+                }
                 break;
             case "FFFTF":
                 // right
@@ -139,7 +148,8 @@ public class FaceGameController : MonoBehaviour
                 break;
         }
 
-        if(note.noteType == faceNoteType){
+        if (note.noteType == faceNoteType)
+        {
             note.IsDone();
         }
 
@@ -172,28 +182,27 @@ public class FaceGameController : MonoBehaviour
 
     private Vector2 faceMouth(FaceMesh.Result face)
     {
-
-
-        Vector3 center = face.keypoints[6];
-        Vector3 left = face.keypoints[287];
-        Vector3 right = face.keypoints[57];
+        Vector3 left = face.keypoints[292];
+        Vector3 right = face.keypoints[62];
         Vector3 up = face.keypoints[13];
         Vector3 down = face.keypoints[14];
+        //calculating size of mouth opening
+        float height = -(up[1] - down[1]);
+        float width = -(left[0] - right[0]);
+        //ratio of length after and before
+        float x = 0;
+        float y = 0;
 
-        Vector3 leftRight = right - left;
-        Vector3 downUp = up - down;
+        if (preH != -20)    x = (height / preH);
+        if (preW != -20)    y = (width / preW);
 
-        float xzAngle = Vector2.SignedAngle(new Vector2(leftRight[0], leftRight[2]), new Vector2(1, 0));
-        float yzAngle = Vector2.SignedAngle(new Vector2(downUp[1], downUp[2]), new Vector2(1, 0));
+        preH = height;
+        preW = width;
 
-
-        scoreText.text = "" + xzAngle + " || " + yzAngle;
-
-        return new Vector2(xzAngle, yzAngle);
+        return new Vector2(x, y);
     }
 
 
 
 
 }
-
