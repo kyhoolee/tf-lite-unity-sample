@@ -4,7 +4,7 @@ public class FaceNoteMovement : MonoBehaviour
 {
     private Rigidbody rb;
     public Vector3 forwardForce = new Vector3(0, 110f, 0);
-    float positionYStart = 10f;
+    float positionYStart = 13f;
     float positionYEnd = -10f;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
@@ -87,13 +87,13 @@ public class FaceNoteMovement : MonoBehaviour
 
     void DisableScoreAll()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < player.score.Length; i++)
             player.score[i].gameObject.SetActive(false);
 
     }
 
     public void IsDone()
-    {
+    {   
         if (state == NoteState.Used)
         {
             float posY = gameObject.transform.position.y;

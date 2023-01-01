@@ -14,7 +14,7 @@ public class FaceGenerate : MonoBehaviour
     Vector3 bR;
     float posRange;
     Vector3 generatePos;
-    public int number_notes = 5;
+    public int number_notes = 4;
     [SerializeField] List<GameObject> pooledNotes;
 
     public float timeStartGenerate = 0f;
