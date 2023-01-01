@@ -684,18 +684,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569522091}
   m_CullTransparentMesh: 1
---- !u!114 &620327040 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5631213130110680876, guid: b829ca8a2e36da14ca826d7c60945d5a,
-    type: 3}
-  m_PrefabInstance: {fileID: 5631213129631944620}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4e469c33da6354d9514987d6f5b0be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &663595272
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cf61ba2e499f8418bec9b4bf46236d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 620327040}
+  player: {fileID: 0}
   scoreText: {fileID: 56103921}
   faceMeshProcess: {fileID: 1453601109}
   topLeft: {fileID: 1076314843}
@@ -2064,7 +2052,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1999392575
 GameObject:
@@ -2319,6 +2307,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5371018266040593321, guid: b829ca8a2e36da14ca826d7c60945d5a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371018266040593325, guid: b829ca8a2e36da14ca826d7c60945d5a,
+        type: 3}
+      propertyPath: gameController
+      value: 
+      objectReference: {fileID: 1957712545}
     - target: {fileID: 5631213130110680872, guid: b829ca8a2e36da14ca826d7c60945d5a,
         type: 3}
       propertyPath: m_RootOrder
