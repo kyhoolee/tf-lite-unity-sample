@@ -14,12 +14,12 @@ public class FaceGenerate : MonoBehaviour
     Vector3 bR;
     float posRange;
     Vector3 generatePos;
-    public int number_notes = 4;
+    public int number_notes = 15;
     [SerializeField] List<GameObject> pooledNotes;
 
-    public float timeStartGenerate = 0f;
-    public float spawnTimeRange = 1f;
-
+    [SerializeField] private float timeStartGenerate = 0f;
+    [SerializeField] private float spawnTimeRange = 1f;
+    public float SpawnTimeRange { get => spawnTimeRange;}
     void Awake()
     {
         // 1. Get game-region size 
@@ -42,24 +42,7 @@ public class FaceGenerate : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    void FixedUpdate()
-    {
-        // after spawnTimeRange second, we get note in pool to spawn
-        timeStartGenerate += Time.deltaTime;
-        if (timeStartGenerate > spawnTimeRange)
-        {
-            timeStartGenerate = 0f;
-            Spawn();
-        }
-    }
-
-    GameObject Spawn()
+    public GameObject Spawn()
     {
         for (int i = 0; i < pooledNotes.Count; i++)
         {
@@ -85,5 +68,9 @@ public class FaceGenerate : MonoBehaviour
         i++;
         go.SetActive(false);
         return go;
+    }
+    
+    public void setTimeRespawn(float t){
+        this.spawnTimeRange = t;
     }
 }

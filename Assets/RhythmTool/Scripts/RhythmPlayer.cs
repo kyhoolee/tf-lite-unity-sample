@@ -118,7 +118,7 @@ namespace RhythmTool
         /// Play the AudioClip. 
         /// </summary>
         public void Play()
-        {
+        {      
             if (audioClip == null)
                 return;
 

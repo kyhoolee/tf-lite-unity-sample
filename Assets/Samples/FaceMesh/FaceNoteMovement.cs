@@ -3,9 +3,10 @@ using UnityEngine;
 public class FaceNoteMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    public Vector3 forwardForce = new Vector3(0, 110f, 0);
-    float positionYStart = 13f;
-    float positionYEnd = -10f;
+    public Vector3 forwardForce = new Vector3(0, 60f, 0);
+    float positionYStart = 15f;
+    float positionYEnd = -5f;
+    float st;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
     private SpriteRenderer spriteRenderer;
@@ -18,7 +19,9 @@ public class FaceNoteMovement : MonoBehaviour
     4: up
     ** note: left and right of player is inveresed
     */
-    public int noteType = -1;
+    [SerializeField] private int noteType = -1;
+    public int NoteType { get => noteType; }
+    static int prevNoteType = -1;
     int scoreType = 0;
     private void Awake()
     {
@@ -30,9 +33,21 @@ public class FaceNoteMovement : MonoBehaviour
 
     private void Start()
     {
-        noteType = Random.Range(0, arrSprite.Length);
+        noteType = RandomSpiritIndex();
         ChangeTex(arrSprite[noteType]);
         this.state = NoteState.Used;
+    }
+
+    int RandomSpiritIndex()
+    {   
+        int number_random = Random.Range(0, arrSprite.Length);
+        if (number_random == prevNoteType)
+        {
+            number_random ++;
+            number_random = (number_random == arrSprite.Length) ? 0 : number_random;
+        }
+        prevNoteType = number_random;
+        return number_random;
     }
 
     public void ChangeTex(Sprite sprite)
@@ -60,7 +75,7 @@ public class FaceNoteMovement : MonoBehaviour
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
             + generatePos;
-        noteType = Random.Range(0, arrSprite.Length);
+        noteType = RandomSpiritIndex();
         ChangeTex(arrSprite[noteType]);
         this.state = NoteState.Used;
     }
@@ -72,7 +87,7 @@ public class FaceNoteMovement : MonoBehaviour
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
             + generatePos;
-        noteType = Random.Range(0, arrSprite.Length);
+        noteType = RandomSpiritIndex();
         ChangeTex(arrSprite[noteType]);
     }
     public Vector3 GetPostion()
@@ -93,17 +108,17 @@ public class FaceNoteMovement : MonoBehaviour
     }
 
     public void IsDone()
-    {   
+    {
         if (state == NoteState.Used)
         {
             float posY = gameObject.transform.position.y;
-            if (posY >= 6f)
-            {
-                scoreType = 0;
-            }
-            else if (posY >= -3f && posY < 5f)
+            if (posY > 1f)
             {
                 scoreType = 1;
+            }
+            else if (posY >= -0.5f && posY <= 1f)
+            {
+                scoreType = 0;
             }
             else scoreType = 2;
             DisableScoreAll();
