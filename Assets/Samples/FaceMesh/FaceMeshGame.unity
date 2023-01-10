@@ -741,7 +741,7 @@ PrefabInstance:
     - target: {fileID: 4387023361394396351, guid: 46108ef556228f6439f78bb2bbb6ef1f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6229634375422430084, guid: 46108ef556228f6439f78bb2bbb6ef1f,
         type: 3}
@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolution: 3
   capabilities: 0
-  playOnAwake: 1
+  playOnAwake: 0
   focusMode: 0
   exposureMode: 0
   OnFrame:
@@ -1335,10 +1335,10 @@ MonoBehaviour:
     type: 3}
   topLeft: {fileID: 1076314843}
   bottomRight: {fileID: 1442064495}
-  number_notes: 4
+  number_notes: 10
   pooledNotes: []
   timeStartGenerate: 0
-  spawnTimeRange: 1
+  spawnTimeRange: 0.5
 --- !u!1 &1051232094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2035,7 +2035,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658138329}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!4 &1658138333
 Transform:
   m_ObjectHideFlags: 0

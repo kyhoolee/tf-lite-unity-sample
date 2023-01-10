@@ -1,24 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Timers;
 
 public class FaceGenerate : MonoBehaviour
 {
     [SerializeField] private FaceGameController gameController;
     [SerializeField] private GameObject faceNotePrefab;
     private FaceNoteMovement note;
-    int i = 0;
-
+    int index_name = 0;
+    int _i = -1;
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
     Vector3 tL;
     Vector3 bR;
     float posRange;
     Vector3 generatePos;
-    public int number_notes = 4;
+    public int number_notes = 10;
     [SerializeField] List<GameObject> pooledNotes;
 
     public float timeStartGenerate = 0f;
-    public float spawnTimeRange = 1f;
+    public float spawnTimeRange = 0.5f;
 
     void Awake()
     {
@@ -48,23 +49,31 @@ public class FaceGenerate : MonoBehaviour
 
     }
 
+
     void FixedUpdate()
     {
         // after spawnTimeRange second, we get note in pool to spawn
         timeStartGenerate += Time.deltaTime;
-        if (timeStartGenerate > spawnTimeRange)
+        if (timeStartGenerate >= spawnTimeRange)
         {
-            timeStartGenerate = 0f;
+            timeStartGenerate = 0;
             Spawn();
         }
     }
 
     GameObject Spawn()
     {
+        _i++;
+        // if (_i == pooledNotes.Count)
+        // {
+        //     _i = 0;
+            
+        // }
         for (int i = 0; i < pooledNotes.Count; i++)
         {
             if (!pooledNotes[i].activeSelf)
             {
+                // Debug.Log("Spawn " + id);
                 // 1. when reactive, rerandom position and spirit
                 pooledNotes[i].GetComponent<FaceNoteMovement>().RandomOnReset(posRange, generatePos);
                 gameController.Player.AddNoteMovement(pooledNotes[i].GetComponent<FaceNoteMovement>());
@@ -72,6 +81,7 @@ public class FaceGenerate : MonoBehaviour
                 return pooledNotes[i];
             }
         }
+
         return null;
     }
 
@@ -80,10 +90,9 @@ public class FaceGenerate : MonoBehaviour
         // 2. Generate note 
         var go = Instantiate(faceNotePrefab);
         note = go.GetComponent<FaceNoteMovement>();
-        note.gameObject.name = (i + 1).ToString();
-        note.Init(posRange, generatePos, gameController.Player);
-        i++;
-        go.SetActive(false);
+        note.gameObject.name = (index_name++ + 1).ToString();
+        note.Init(gameController.Player);
+        // go.SetActive(false);
         return go;
     }
 }

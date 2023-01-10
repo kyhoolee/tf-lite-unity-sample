@@ -150,7 +150,7 @@ public class FaceGameController : MonoBehaviour
 
         if (note.noteType == faceNoteType)
         {
-            note.IsDone();
+            // note.IsDone();
         }
 
         return result;

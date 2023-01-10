@@ -13,7 +13,6 @@ public class FacePlayerMovement : MonoBehaviour
 
     public void AddNoteMovement(FaceNoteMovement noteMovement)
     {
-        // Debug.Log(noteMovement.gameObject.name + " enqueue");
         q.Enqueue(noteMovement);
     }
 
@@ -24,11 +23,8 @@ public class FacePlayerMovement : MonoBehaviour
 
     public void NextNote()
     {
-        if (q.Count > 0)
-        {
-            // Debug.Log(q.Dequeue().gameObject.name + " dequeue");
-            q.Dequeue();
-        }
+        if (q.Count > 0) q.Dequeue();
+        return;
     }
 
     public int GetCount()

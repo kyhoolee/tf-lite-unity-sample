@@ -3,9 +3,9 @@ using UnityEngine;
 public class FaceNoteMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    public Vector3 forwardForce = new Vector3(0, 110f, 0);
+    public Vector3 forwardForce = new Vector3(0, 50f, 0);
     float positionYStart = 13f;
-    float positionYEnd = -10f;
+    float positionYEnd = 0f;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
     private SpriteRenderer spriteRenderer;
@@ -19,20 +19,20 @@ public class FaceNoteMovement : MonoBehaviour
     ** note: left and right of player is inveresed
     */
     public int noteType = -1;
+    public float st = 0f;
     int scoreType = 0;
     private void Awake()
     {
         // get object ridibody
         rb = GetComponent<Rigidbody>();
         rb.rotation = Quaternion.identity;
+        rb.velocity = new Vector3(0, 0, 0);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
     {
-        noteType = Random.Range(0, arrSprite.Length);
-        ChangeTex(arrSprite[noteType]);
-        this.state = NoteState.Used;
+
     }
 
     public void ChangeTex(Sprite sprite)
@@ -41,14 +41,13 @@ public class FaceNoteMovement : MonoBehaviour
     }
 
     public void FixedUpdate()
-    {   // make note move into player
-        //forwardForce += 1;
-        rb.AddForce(-forwardForce * Time.deltaTime);
-        if (rb.transform.position.y < positionYEnd)
+    {   
+        if (rb.transform.position.y <= positionYEnd)
         {
             this.gameObject.SetActive(false);
             this.state = NoteState.Free;
             player.NextNote();
+            Debug.Log(Time.time - st);
         }
     }
     /*
@@ -56,6 +55,9 @@ public class FaceNoteMovement : MonoBehaviour
     */
     public void RandomOnReset(float posRange, Vector3 generatePos)
     {
+        // add speed 
+        // Debug.Log(rb);
+        rb.velocity = -forwardForce * Time.deltaTime;
         this.gameObject.transform.localPosition =
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
@@ -63,17 +65,13 @@ public class FaceNoteMovement : MonoBehaviour
         noteType = Random.Range(0, arrSprite.Length);
         ChangeTex(arrSprite[noteType]);
         this.state = NoteState.Used;
+        st = Time.time;
     }
     // replace and set spirit when firstly created
-    public void Init(float posRange, Vector3 generatePos, FacePlayerMovement player = null)
+    public void Init(FacePlayerMovement player = null)
     {
         this.player = player;
-        this.gameObject.transform.localPosition =
-            new Vector3(
-                Random.Range(-posRange, posRange), positionYStart, 1f)
-            + generatePos;
-        noteType = Random.Range(0, arrSprite.Length);
-        ChangeTex(arrSprite[noteType]);
+        this.gameObject.SetActive(false);
     }
     public Vector3 GetPostion()
     {
@@ -93,7 +91,7 @@ public class FaceNoteMovement : MonoBehaviour
     }
 
     public void IsDone()
-    {   
+    {
         if (state == NoteState.Used)
         {
             float posY = gameObject.transform.position.y;
