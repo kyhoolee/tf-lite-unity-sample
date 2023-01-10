@@ -3,8 +3,8 @@ using UnityEngine;
 public class FaceNoteMovement : MonoBehaviour
 {
     private Rigidbody rb;
-    public Vector3 forwardForce = new Vector3(0, 60f, 0);
-    float positionYStart = 15f;
+    public Vector3 forwardForce = new Vector3(0, 200f, 0);
+    float positionYStart = 10f;
     float positionYEnd = -5f;
     float st;
     [SerializeField] private FacePlayerMovement player;
@@ -28,13 +28,12 @@ public class FaceNoteMovement : MonoBehaviour
         // get object ridibody
         rb = GetComponent<Rigidbody>();
         rb.rotation = Quaternion.identity;
+        rb.velocity = new Vector3(0,0,0);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
     {
-        noteType = RandomSpiritIndex();
-        ChangeTex(arrSprite[noteType]);
         this.state = NoteState.Used;
     }
 
@@ -56,9 +55,7 @@ public class FaceNoteMovement : MonoBehaviour
     }
 
     public void FixedUpdate()
-    {   // make note move into player
-        //forwardForce += 1;
-        rb.AddForce(-forwardForce * Time.deltaTime);
+    {   
         if (rb.transform.position.y < positionYEnd)
         {
             this.gameObject.SetActive(false);
@@ -70,7 +67,9 @@ public class FaceNoteMovement : MonoBehaviour
     replace and reset spirit for note when it is reactive
     */
     public void RandomOnReset(float posRange, Vector3 generatePos)
-    {
+    {   
+        // make note falling
+        rb.velocity = -forwardForce * Time.deltaTime;
         this.gameObject.transform.localPosition =
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
@@ -80,15 +79,10 @@ public class FaceNoteMovement : MonoBehaviour
         this.state = NoteState.Used;
     }
     // replace and set spirit when firstly created
-    public void Init(float posRange, Vector3 generatePos, FacePlayerMovement player = null)
+    public void Init(FacePlayerMovement player = null)
     {
         this.player = player;
-        this.gameObject.transform.localPosition =
-            new Vector3(
-                Random.Range(-posRange, posRange), positionYStart, 1f)
-            + generatePos;
-        noteType = RandomSpiritIndex();
-        ChangeTex(arrSprite[noteType]);
+        this.gameObject.SetActive(false);
     }
     public Vector3 GetPostion()
     {

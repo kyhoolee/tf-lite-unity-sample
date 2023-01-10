@@ -65,10 +65,10 @@ namespace RhythmTool
             //     faceGameController.Spawn((60 / beats[0].bpm));
 
             // Invoke(nameof(PlayerPlay), beats[0].timestamp + 1f);
-            Invoke(nameof(PlayerPlay), onsets[0].timestamp + 1.8f);
+            Invoke(nameof(PlayerPlay), onsets[0].timestamp + 2.54f);
             for (int i = 0; i < onsets.Count; i++)
             {
-                Debug.Log(onsets[i].timestamp + "  " + onsets[i].strength + " " + onsets[i].length);
+                // Debug.Log(onsets[i].timestamp + "  " + onsets[i].strength + " " + onsets[i].length);
                 // if (onsets[0].strength >= 1)
                     Invoke(nameof(SpawnOnset), onsets[i].timestamp);
             }

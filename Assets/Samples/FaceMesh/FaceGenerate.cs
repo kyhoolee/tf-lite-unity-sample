@@ -6,7 +6,7 @@ public class FaceGenerate : MonoBehaviour
     [SerializeField] private FaceGameController gameController;
     [SerializeField] private GameObject faceNotePrefab;
     private FaceNoteMovement note;
-    int i = 0;
+    int index_note = 0;
 
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
@@ -63,10 +63,8 @@ public class FaceGenerate : MonoBehaviour
         // 2. Generate note 
         var go = Instantiate(faceNotePrefab);
         note = go.GetComponent<FaceNoteMovement>();
-        note.gameObject.name = (i + 1).ToString();
-        note.Init(posRange, generatePos, gameController.Player);
-        i++;
-        go.SetActive(false);
+        note.gameObject.name = (index_note++ + 1).ToString();
+        note.Init(gameController.Player);
         return go;
     }
     

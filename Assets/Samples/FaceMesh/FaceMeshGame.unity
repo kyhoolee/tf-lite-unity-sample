@@ -1496,7 +1496,7 @@ MonoBehaviour:
     type: 3}
   topLeft: {fileID: 1076314843}
   bottomRight: {fileID: 1442064495}
-  number_notes: 15
+  number_notes: 10
   pooledNotes: []
   timeStartGenerate: 0
   spawnTimeRange: 1
