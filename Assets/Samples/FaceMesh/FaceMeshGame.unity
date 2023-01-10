@@ -1496,7 +1496,7 @@ MonoBehaviour:
     type: 3}
   topLeft: {fileID: 1076314843}
   bottomRight: {fileID: 1442064495}
-  number_notes: 10
+  number_notes: 15
   pooledNotes: []
   timeStartGenerate: 0
   spawnTimeRange: 1
@@ -2120,7 +2120,7 @@ MonoBehaviour:
   analyzer: {fileID: 879557567}
   player: {fileID: 231049670}
   faceGameController: {fileID: 1957712545}
-  audioClip: {fileID: 8300000, guid: 9507fc4894e08634ba08dc0c6445f7f2, type: 3}
+  audioClip: {fileID: 8300000, guid: aa447fb24494e3d49b3c77a311f33bd3, type: 3}
 --- !u!4 &1619907363
 Transform:
   m_ObjectHideFlags: 0

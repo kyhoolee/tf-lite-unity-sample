@@ -65,6 +65,7 @@ public class FaceGenerate : MonoBehaviour
         note = go.GetComponent<FaceNoteMovement>();
         note.gameObject.name = (index_note++ + 1).ToString();
         note.Init(gameController.Player);
+        note.gameObject.SetActive(false);
         return go;
     }
     
