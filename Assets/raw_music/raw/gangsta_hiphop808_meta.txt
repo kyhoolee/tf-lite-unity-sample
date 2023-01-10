@@ -1,0 +1,47 @@
+{
+  "song_id": "gangsta_hiphop808",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 9,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 10,
+      "endTime": 17,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 18,
+      "endTime": 38,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 39,
+      "endTime": 49,
+      "mode": 2,
+      "is_crazy": true
+    },
+    {
+      "startTime": 50,
+      "endTime": 58,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 59,
+      "endTime": 80,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 81,
+      "endTime": 99,
+      "mode": 3,
+      "is_crazy": false
+    }
+  ]
+}

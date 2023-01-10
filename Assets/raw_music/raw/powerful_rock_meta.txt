@@ -1,0 +1,35 @@
+{
+  "song_id": "powerful_rock",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 11,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 12,
+      "endTime": 28,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 29,
+      "endTime": 39,
+      "mode": 3,
+      "is_crazy": false
+    },
+    {
+      "startTime": 40,
+      "endTime": 50,
+      "mode": 3,
+      "is_crazy": true
+    },
+    {
+      "startTime": 51,
+      "endTime": 64,
+      "mode": 2,
+      "is_crazy": false
+    }
+  ]
+}

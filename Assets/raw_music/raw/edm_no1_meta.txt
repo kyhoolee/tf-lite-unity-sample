@@ -1,0 +1,36 @@
+{
+  "song_id": "edm_no1",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 6,
+      "mode": 0,
+      "is_crazy": false
+    },{
+      "startTime": 7,
+      "endTime": 14,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 15,
+      "endTime": 46,
+      "mode": 2,
+      "is_crazy": false
+    },{
+      "startTime": 47,
+      "endTime": 59,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 60,
+      "endTime": 70,
+      "mode": 1,
+      "is_crazy": true
+    },{
+      "startTime": 71,
+      "endTime": 108,
+      "mode": 2,
+      "is_crazy": false
+    }
+  ]
+}

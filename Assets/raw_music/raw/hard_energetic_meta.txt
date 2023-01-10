@@ -1,0 +1,31 @@
+{
+  "song_id": "hard_energetic",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 13,
+      "mode": 0,
+      "is_crazy": false
+    },{
+      "startTime": 14,
+      "endTime": 27,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 28,
+      "endTime": 41,
+      "mode": 2,
+      "is_crazy": false
+    },{
+      "startTime": 42,
+      "endTime": 52,
+      "mode": 1,
+      "is_crazy": true
+    },{
+      "startTime": 53,
+      "endTime": 58,
+      "mode": 3,
+      "is_crazy": false
+    }
+  ]
+}

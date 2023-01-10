@@ -1,0 +1,46 @@
+{
+  "song_id": "really_powerful",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 9,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 10,
+      "endTime": 29,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 30,
+      "endTime": 39,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 40,
+      "endTime": 50,
+      "mode": 2,
+      "is_crazy": true
+    },{
+      "startTime": 51,
+      "endTime": 79,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 79,
+      "endTime": 89,
+      "mode": 2,
+      "is_crazy": true
+    },
+    {
+      "startTime": 90,
+      "endTime": 103,
+      "mode": 1,
+      "is_crazy": false
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "song_id": "hiphop_drift",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 8,
+      "mode": 0,
+      "is_crazy": false
+    },{
+      "startTime": 9,
+      "endTime": 17,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 18,
+      "endTime": 36,
+      "mode": 2,
+      "is_crazy": false
+    },{
+      "startTime": 37,
+      "endTime": 47,
+      "mode": 2,
+      "is_crazy": true
+    },{
+      "startTime": 48,
+      "endTime": 65,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 66,
+      "endTime": 77,
+      "mode": 0,
+      "is_crazy": false
+    },{
+      "startTime": 78,
+      "endTime": 99,
+      "mode": 2,
+      "is_crazy": false
+    }
+  ]
+}

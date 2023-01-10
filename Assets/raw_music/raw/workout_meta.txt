@@ -1,0 +1,45 @@
+{
+  "song_id": "workout",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 8,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 9,
+      "endTime": 18,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 19,
+      "endTime": 33,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 34,
+      "endTime": 44,
+      "mode": 2,
+      "is_crazy": true
+    },
+    {
+      "startTime": 44,
+      "endTime": 69,
+      "mode": 2,
+      "is_crazy": false
+    },{
+      "startTime": 70,
+      "endTime": 90,
+      "mode": 2,
+      "is_crazy": true
+    },{
+      "startTime": 91,
+      "endTime": 108,
+      "mode": 2,
+      "is_crazy": false
+    }
+  ]
+}

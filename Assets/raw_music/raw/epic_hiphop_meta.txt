@@ -1,0 +1,53 @@
+{
+  "song_id": "epic_hiphop",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 8,
+      "mode": 0,
+      "is_crazy": false
+    },
+     {
+      "startTime": 9,
+      "endTime": 19,
+      "mode": 1,
+      "is_crazy": false
+    },
+     {
+      "startTime": 20,
+      "endTime": 38,
+      "mode": 2,
+      "is_crazy": false
+    },
+     {
+      "startTime": 39,
+      "endTime": 49,
+      "mode": 2,
+      "is_crazy": true
+    },
+     {
+      "startTime": 50,
+      "endTime": 71,
+      "mode": 2,
+      "is_crazy": false
+    },
+     {
+      "startTime": 72,
+      "endTime": 82,
+      "mode": 3,
+      "is_crazy": false
+    },
+     {
+      "startTime": 83,
+      "endTime": 93,
+      "mode": 3,
+      "is_crazy": true
+    },
+     {
+      "startTime": 94,
+      "endTime": 105,
+      "mode": 2,
+      "is_crazy": false
+    }
+  ]
+}

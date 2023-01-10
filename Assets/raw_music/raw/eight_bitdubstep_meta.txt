@@ -1,0 +1,41 @@
+{
+  "song_id": "eight_bitdubstep",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 6,
+      "mode": 0,
+      "is_crazy": false
+    },{
+      "startTime": 7,
+      "endTime": 21,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 22,
+      "endTime": 35,
+      "mode": 2,
+      "is_crazy": false
+    },{
+      "startTime": 36,
+      "endTime": 48,
+      "mode": 3,
+      "is_crazy": false
+    },{
+      "startTime": 49,
+      "endTime": 62,
+      "mode": 1,
+      "is_crazy": true
+    },{
+      "startTime": 63,
+      "endTime": 76,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 77,
+      "endTime": 96,
+      "mode": 2,
+      "is_crazy": false
+    }
+  ]
+}

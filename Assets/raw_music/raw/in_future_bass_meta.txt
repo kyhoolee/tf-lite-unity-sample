@@ -1,0 +1,53 @@
+{
+  "song_id": "in_future_bass",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 8,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 9,
+      "endTime": 21,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 22,
+      "endTime": 33,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 34,
+      "endTime": 44,
+      "mode": 2,
+      "is_crazy": true
+    },
+    {
+      "startTime": 45,
+      "endTime": 56,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 57,
+      "endTime": 69,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 70,
+      "endTime": 90,
+      "mode": 3,
+      "is_crazy": false
+    },
+    {
+      "startTime": 91,
+      "endTime": 106,
+      "mode": 1,
+      "is_crazy": false
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "song_id": "this_is_dubstep",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 6,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 7,
+      "endTime": 17,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 18,
+      "endTime": 34,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 35,
+      "endTime": 45,
+      "mode": 2,
+      "is_crazy": true
+    },
+    {
+      "startTime": 46,
+      "endTime": 70,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 71,
+      "endTime": 91,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 91,
+      "endTime": 98,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 99,
+      "endTime": 116,
+      "mode": 3,
+      "is_crazy": false
+    }
+  ]
+}

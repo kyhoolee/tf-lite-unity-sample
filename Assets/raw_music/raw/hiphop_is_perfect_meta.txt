@@ -1,0 +1,35 @@
+{
+  "song_id": "hiphop_is_perfect",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 10,
+      "mode": 0,
+      "is_crazy": false
+    },
+    {
+      "startTime": 11,
+      "endTime": 20,
+      "mode": 1,
+      "is_crazy": false
+    },
+    {
+      "startTime": 21,
+      "endTime": 30,
+      "mode": 2,
+      "is_crazy": false
+    },
+    {
+      "startTime": 31,
+      "endTime": 40,
+      "mode": 2,
+      "is_crazy": true
+    },
+    {
+      "startTime": 41,
+      "endTime": 46,
+      "mode": 3,
+      "is_crazy": false
+    }
+  ]
+}

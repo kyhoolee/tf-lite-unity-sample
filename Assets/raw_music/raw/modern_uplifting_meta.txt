@@ -1,0 +1,31 @@
+{
+  "song_id": "modern_uplifting",
+  "audio_meta": [
+    {
+      "startTime": 0,
+      "endTime": 8,
+      "mode": 0,
+      "is_crazy": false
+    },{
+      "startTime": 9,
+      "endTime": 22,
+      "mode": 2,
+      "is_crazy": false
+    },{
+      "startTime": 23,
+      "endTime": 46,
+      "mode": 1,
+      "is_crazy": false
+    },{
+      "startTime": 47,
+      "endTime": 57,
+      "mode": 1,
+      "is_crazy": true
+    },{
+      "startTime": 58,
+      "endTime": 75,
+      "mode": 3,
+      "is_crazy": false
+    }
+  ]
+}
