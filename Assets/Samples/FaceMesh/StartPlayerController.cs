@@ -3,12 +3,13 @@ using UnityEngine.UI;
 using TensorFlowLite;
 using RhythmTool;
 
+
 public class StartPlayerController : MonoBehaviour
 {
     [SerializeField] private RectTransform ready;
     [SerializeField] private RectTransform faceTemplate;
     public RawImage bg_face { get; set; }
-    public RawImage match_zone { set; get; }
+    public RectTransform match_zone { set; get; }
     public Text notice { set; get; }
     public RectTransform Ready { get => ready; }
     public RectTransform FaceTemplate { get => faceTemplate; }
@@ -19,12 +20,19 @@ public class StartPlayerController : MonoBehaviour
     [SerializeField] private AnalyzingMusic analyzingMusic;
 
     void Awake()
-    {
+    {   
         RawImage[] rawImageArr = faceTemplate.gameObject.GetComponentsInChildren<RawImage>();
         bg_face = rawImageArr[0];
         notice = faceTemplate.gameObject.GetComponentInChildren<Text>();
-        match_zone = rawImageArr[1];
-        match_zone.gameObject.SetActive(false);
+        RectTransform[] x = faceTemplate.GetComponentsInChildren<RectTransform>();
+        for(int i = 0; i < x.Length; i++){
+            if(x[i].name == "match zone"){
+                match_zone = x[i];
+                break;
+            }
+        }
+        
+        match_zone.gameObject.SetActive(false);  
 
     }
     // Start is called before the first frame update

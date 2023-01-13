@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace RhythmTool
 {
@@ -16,6 +17,8 @@ namespace RhythmTool
         private float prevTime;
         private List<Onset> onsets;
         private List<Beat> beats;
+        private List<Value> values;
+        private List<Chroma> chromas;
 
         void Awake()
         {
@@ -58,25 +61,31 @@ namespace RhythmTool
             //Find all beats for the part of the song that is currently playing.
             player.rhythmData.GetFeatures<Beat>(beats, 0, audioClip.length);
             player.rhythmData.GetFeatures<Onset>(onsets, 0, audioClip.length);
+            // player.rhythmData.GetFeatures<Value>(values, 0, audioClip.length);
+            // player.rhythmData.GetFeatures<Chroma>(chromas, 0, audioClip.length);
 
-            Debug.Log(onsets.Count);
+
+            float maxStrength = onsets.Max(x => x.strength);
+            float minStrength = onsets.Min(x => x.strength);
+            float avg = (maxStrength + minStrength) / 2;
+            Debug.Log(onsets.Count + " " + maxStrength + " " + minStrength);
             // Debug.Log("A beat occurred at " + 60 / (beats[0].bpm*Time.deltaTime));
             // if (!faceGameController.isGenerate)
             //     faceGameController.Spawn((60 / beats[0].bpm));
 
             // Invoke(nameof(PlayerPlay), beats[0].timestamp + 1f);
-            Invoke(nameof(PlayerPlay), onsets[0].timestamp + 2.54f);
+            Invoke(nameof(PlayerPlay), 2.56f -  onsets[0].timestamp);
             for (int i = 0; i < onsets.Count; i++)
             {
                 // Debug.Log(onsets[i].timestamp + "  " + onsets[i].strength + " " + onsets[i].length);
-                // if (onsets[0].strength >= 1)
-                    Invoke(nameof(SpawnOnset), onsets[i].timestamp);
+                // if (onsets[0].strength >= avg)
+                Invoke(nameof(SpawnOnset), onsets[i].timestamp);
             }
 
         }
         void SpawnOnset()
         {
-            faceGameController.Spawn1();
+            faceGameController.Spawn();
         }
     }
 }

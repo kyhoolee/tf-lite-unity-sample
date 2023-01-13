@@ -16,10 +16,6 @@ public class FaceGenerate : MonoBehaviour
     Vector3 generatePos;
     public int number_notes = 15;
     [SerializeField] List<GameObject> pooledNotes;
-
-    [SerializeField] private float timeStartGenerate = 0f;
-    [SerializeField] private float spawnTimeRange = 1f;
-    public float SpawnTimeRange { get => spawnTimeRange;}
     void Awake()
     {
         // 1. Get game-region size 
@@ -65,11 +61,7 @@ public class FaceGenerate : MonoBehaviour
         note = go.GetComponent<FaceNoteMovement>();
         note.gameObject.name = (index_note++ + 1).ToString();
         note.Init(gameController.Player);
-        note.gameObject.SetActive(false);
+        go.SetActive(false);
         return go;
-    }
-    
-    public void setTimeRespawn(float t){
-        this.spawnTimeRange = t;
     }
 }

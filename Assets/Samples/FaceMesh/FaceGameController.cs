@@ -204,19 +204,7 @@ public class FaceGameController : MonoBehaviour
 
         return new Vector2(x, y);
     }
-
-    
-
-    public void Spawn(float spawnTimeRange)
-    {
-        isGenerate = true;
-        if (faceGenerate != null)
-        {
-            faceGenerate.setTimeRespawn(spawnTimeRange);
-        }
-    }
-
-    public void Spawn1(){
+    public void Spawn(){
         if(faceGenerate != null){
             faceGenerate.Spawn();
         }

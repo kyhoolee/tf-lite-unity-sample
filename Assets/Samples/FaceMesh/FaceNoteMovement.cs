@@ -5,8 +5,7 @@ public class FaceNoteMovement : MonoBehaviour
     private Rigidbody rb;
     public Vector3 forwardForce = new Vector3(0, 200f, 0);
     float positionYStart = 15f;
-    float positionYEnd = -5f;
-    float st;
+    float positionYEnd = 0f;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
     private SpriteRenderer spriteRenderer;
@@ -61,7 +60,6 @@ public class FaceNoteMovement : MonoBehaviour
             this.gameObject.SetActive(false);
             this.state = NoteState.Free;
             player.NextNote();
-            Debug.Log(Time.time - st);
         }
     }
     /*
@@ -70,7 +68,7 @@ public class FaceNoteMovement : MonoBehaviour
     public void RandomOnReset(float posRange, Vector3 generatePos)
     {   
         // make note falling
-        rb.velocity = -forwardForce * Time.deltaTime;
+        rb.velocity = -forwardForce * 1/50;
         this.gameObject.transform.localPosition =
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
@@ -78,7 +76,6 @@ public class FaceNoteMovement : MonoBehaviour
         noteType = RandomSpiritIndex();
         ChangeTex(arrSprite[noteType]);
         this.state = NoteState.Used;
-        st = Time.time;
     }
     // replace and set spirit when firstly created
     public void Init(FacePlayerMovement player = null)

@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3897cfcf026eb848b3be5b9a80f84af, type: 3}
+  m_Name: TheFatRat
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 753d901e8798e50459e0e2132c1c3f81, type: 3}
+  _tracks:
+  - {fileID: 5833883557118128149}
+--- !u!114 &5833883557118128149
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4441c1fab3119af4bb6d18cb48a9c462, type: 3}
+  m_Name: New Onset Track
+  m_EditorClassIdentifier: 
+  _name: New Onset Track
+  _features:
+  - timestamp: 8.211567
+    length: 0
+    strength: 1.583333
+  - timestamp: 10.008348
+    length: 0
+    strength: 1.583333
+  - timestamp: 11.805131
+    length: 0
+    strength: 1.583333
+  - timestamp: 13.362343
+    length: 0
+    strength: 1.583333
+  - timestamp: 15.159125
+    length: 0
+    strength: 1.583333
+  - timestamp: 16.836123
+    length: 0
+    strength: 1.583333
+  - timestamp: 18.513119
+    length: 0
+    strength: 1.583333
+  - timestamp: 19.950544
+    length: 0
+    strength: 1.583333
+  - timestamp: 21.507757
+    length: 0
+    strength: 1.583333
+  - timestamp: 23.184753
+    length: 0
+    strength: 1.583333
+  - timestamp: 24.382608
+    length: 0
+    strength: 1.583333
+  - timestamp: 26.17939
+    length: 0
+    strength: 1.583333
+  - timestamp: 28.095959
+    length: 0
+    strength: 1.583333
+  - timestamp: 30.012527
+    length: 0
+    strength: 1.583333
+  - timestamp: 31.210382
+    length: 0
+    strength: 1.583333
+  - timestamp: 34.664375
+    length: 0
+    strength: 1.583333
+  - timestamp: 35.76223
+    length: 0
+    strength: 1.583333
+  - timestamp: 35.76223
+    length: 0
+    strength: 1.583333
+  - timestamp: 35.76223
+    length: 0
+    strength: 1.583333
+  - timestamp: 35.86223
+    length: 0
+    strength: 1.583333
+  - timestamp: 35.86223
+    length: 0
+    strength: 1.583333
+  - timestamp: 36.960083
+    length: 0
+    strength: 1.583333
+  - timestamp: 38.157936
+    length: 0
+    strength: 1.583333
+  - timestamp: 39.35579
+    length: 0
+    strength: 1.583333
+  - timestamp: 40.433857
+    length: 0
+    strength: 1.583333
+  - timestamp: 41.871284
+    length: 0
+    strength: 1.583333
+  - timestamp: 43.188927
+    length: 0
+    strength: 1.583333
+  - timestamp: 44.626354
+    length: 0
+    strength: 1.583333
+  - timestamp: 46.682495
+    length: 0
+    strength: 1.583333
+  - timestamp: 47.14185
+    length: 0
+    strength: 1.583333

@@ -6,8 +6,6 @@ public class FacePlayerMovement : MonoBehaviour
 {
     [SerializeField] private FaceGameController gameController;
     public RectTransform[] score;
-
-    public float timeNote = -1.0f;
     // make queue to check note following order
     Queue<FaceNoteMovement> q = new Queue<FaceNoteMovement>();
 
