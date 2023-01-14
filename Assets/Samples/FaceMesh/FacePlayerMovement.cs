@@ -8,7 +8,7 @@ public class FacePlayerMovement : MonoBehaviour
     public RectTransform[] score;
     // make queue to check note following order
     Queue<FaceNoteMovement> q = new Queue<FaceNoteMovement>();
-
+    
     public void AddNoteMovement(FaceNoteMovement noteMovement)
     {
         // Debug.Log(noteMovement.gameObject.name + " enqueue");

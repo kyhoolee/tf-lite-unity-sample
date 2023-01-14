@@ -9,8 +9,8 @@ public class FaceGameController : MonoBehaviour
     float logicTimeRange = 0.5f;
     [SerializeField] private FacePlayerMovement player;
     public FacePlayerMovement Player { get => player; }
-    public Text scoreText;
-
+    [SerializeField] private Text scoreText;
+    int score = 0;
     [SerializeField] private FaceMeshProcessor faceMeshProcess;
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
@@ -39,18 +39,20 @@ public class FaceGameController : MonoBehaviour
         isGenerate = true;
     }
 
-    void Awake(){
+    void Awake()
+    {
         startPlayerController = gameObject.GetComponent<StartPlayerController>();
     }
 
     void Start()
-    {   
+    {
 
     }
 
     private void FixedUpdate()
     {
         faceGenerate.gameObject.SetActive(isGenerate);
+        scoreText.text = score.ToString();
         // get press space time
         if (Time.time > timeSpace)
         {
@@ -121,32 +123,32 @@ public class FaceGameController : MonoBehaviour
         {
             case "TFFFF":
                 // down
-                scoreText.text = "down";
+                // scoreText.text = "down";
                 faceNoteType = 0;
                 break;
             case "FFTFF":
                 // left
-                scoreText.text = "left";
+                // scoreText.text = "left";
                 faceNoteType = 3;
                 break;
             case "FFFFT":
                 // straight
-                scoreText.text = "straight";
+                // scoreText.text = "straight";
                 // mouth
                 if (mouth[0] > 2 && mouth[1] < 1)
                 {
-                    scoreText.text = "open mouth";
+                    // scoreText.text = "open mouth";
                     faceNoteType = 2;
                 }
                 break;
             case "FFFTF":
                 // right
-                scoreText.text = "right";
+                // scoreText.text = "right";
                 faceNoteType = 1;
                 break;
             case "FTFFF":
                 // up
-                scoreText.text = "up";
+                // scoreText.text = "up";
                 faceNoteType = 4;
                 break;
             default:
@@ -156,7 +158,7 @@ public class FaceGameController : MonoBehaviour
 
         if (note.NoteType == faceNoteType)
         {
-            note.IsDone();
+            score += note.IsDone();
         }
 
         return result;
@@ -204,8 +206,10 @@ public class FaceGameController : MonoBehaviour
 
         return new Vector2(x, y);
     }
-    public void Spawn(){
-        if(faceGenerate != null){
+    public void Spawn()
+    {
+        if (faceGenerate != null)
+        {
             faceGenerate.Spawn();
         }
     }

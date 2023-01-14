@@ -65,16 +65,17 @@ namespace RhythmTool
             // player.rhythmData.GetFeatures<Chroma>(chromas, 0, audioClip.length);
 
 
-            float maxStrength = onsets.Max(x => x.strength);
-            float minStrength = onsets.Min(x => x.strength);
-            float avg = (maxStrength + minStrength) / 2;
-            Debug.Log(onsets.Count + " " + maxStrength + " " + minStrength);
+            // float maxStrength = onsets.Max(x => x.strength);
+            // float minStrength = onsets.Min(x => x.strength);
+            // float avg = (maxStrength + minStrength) / 2;
+            // Debug.Log(onsets.Count + " " + maxStrength + " " + minStrength);
             // Debug.Log("A beat occurred at " + 60 / (beats[0].bpm*Time.deltaTime));
             // if (!faceGameController.isGenerate)
             //     faceGameController.Spawn((60 / beats[0].bpm));
 
             // Invoke(nameof(PlayerPlay), beats[0].timestamp + 1f);
-            Invoke(nameof(PlayerPlay), 2.56f -  onsets[0].timestamp);
+            // 200ms : 10m-2.72s
+            Invoke(nameof(PlayerPlay), 2.72f -  onsets[0].timestamp);
             for (int i = 0; i < onsets.Count; i++)
             {
                 // Debug.Log(onsets[i].timestamp + "  " + onsets[i].strength + " " + onsets[i].length);

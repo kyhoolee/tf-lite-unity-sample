@@ -23,7 +23,7 @@ public class FaceGenerate : MonoBehaviour
         bR = bottomRight.transform.position;
 
         posRange = (bR.x - tL.x) / 2;
-        generatePos = new Vector3(tL.x + posRange, tL.y, 0);
+        generatePos = new Vector3(tL.x + posRange, bR.y, 0);
         // create pool notes
         pooledNotes = new List<GameObject>();
         for (int i = 0; i < number_notes; i++)

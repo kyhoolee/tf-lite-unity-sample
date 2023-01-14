@@ -4,8 +4,8 @@ public class FaceNoteMovement : MonoBehaviour
 {
     private Rigidbody rb;
     public Vector3 forwardForce = new Vector3(0, 200f, 0);
-    float positionYStart = 15f;
-    float positionYEnd = 0f;
+    float positionYStart = -9f;
+    float positionYEnd = 1f;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
     private SpriteRenderer spriteRenderer;
@@ -22,26 +22,38 @@ public class FaceNoteMovement : MonoBehaviour
     public int NoteType { get => noteType; }
     static int prevNoteType = -1;
     int scoreType = 0;
+    float st = 0;
     private void Awake()
     {
         // get object ridibody
         rb = GetComponent<Rigidbody>();
         rb.rotation = Quaternion.identity;
-        rb.velocity = new Vector3(0,0,0);
+        rb.velocity = new Vector3(0, 0, 0);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Start()
-    {
+    {   
         // this.state = NoteState.Used;
     }
-
+    public void FixedUpdate()
+    {
+        // make note falling
+        rb.velocity = forwardForce * 1 / 50;
+        if (rb.transform.position.y > positionYEnd)
+        {
+            this.gameObject.SetActive(false);
+            this.state = NoteState.Free;
+            player.NextNote();
+            Debug.Log(Time.time - st);
+        }
+    }
     int RandomSpiritIndex()
-    {   
+    {
         int number_random = Random.Range(0, arrSprite.Length);
         if (number_random == prevNoteType)
         {
-            number_random ++;
+            number_random++;
             number_random = (number_random == arrSprite.Length) ? 0 : number_random;
         }
         prevNoteType = number_random;
@@ -52,23 +64,11 @@ public class FaceNoteMovement : MonoBehaviour
     {
         spriteRenderer.sprite = sprite;
     }
-
-    public void FixedUpdate()
-    {   
-        if (rb.transform.position.y <= positionYEnd)
-        {
-            this.gameObject.SetActive(false);
-            this.state = NoteState.Free;
-            player.NextNote();
-        }
-    }
     /*
     replace and reset spirit for note when it is reactive
     */
     public void RandomOnReset(float posRange, Vector3 generatePos)
-    {   
-        // make note falling
-        rb.velocity = -forwardForce * 1/50;
+    {
         this.gameObject.transform.localPosition =
             new Vector3(
                 Random.Range(-posRange, posRange), positionYStart, 1f)
@@ -76,6 +76,7 @@ public class FaceNoteMovement : MonoBehaviour
         noteType = RandomSpiritIndex();
         ChangeTex(arrSprite[noteType]);
         this.state = NoteState.Used;
+        st = Time.time;
     }
     // replace and set spirit when firstly created
     public void Init(FacePlayerMovement player = null)
@@ -100,7 +101,7 @@ public class FaceNoteMovement : MonoBehaviour
 
     }
 
-    public void IsDone()
+    public int IsDone()
     {
         if (state == NoteState.Used)
         {
@@ -120,7 +121,9 @@ public class FaceNoteMovement : MonoBehaviour
             gameObject.SetActive(false);
 
             player.NextNote();
+            return (scoreType == 1) ? 25 : ((scoreType == 0) ? 50 : 15);
         }
+        return 0;
     }
 }
 enum NoteState
