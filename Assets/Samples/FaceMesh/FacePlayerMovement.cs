@@ -33,4 +33,17 @@ public class FacePlayerMovement : MonoBehaviour
     {
         return q.Count();
     }
+    public FaceNoteMovement CheckFaceNoteMatch(int noteType){
+        FaceNoteMovement target = null;
+        bool isFind = false;
+        for(int i = 0; i < q.Count(); i++){
+            if(q.Peek().NoteType == noteType && !isFind){
+                target = q.Dequeue();
+                isFind = true;
+            } else {
+                q.Enqueue(q.Dequeue());
+            }
+        }
+        return target;
+    }
 }

@@ -1,16 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 using RhythmTool;
+using TMPro;
+
 public class DisplayMusicInfo : MonoBehaviour
 {   
     [SerializeField] private RectTransform begin_board;
-    public Text _name {set; get;}
-    public Text _length {set; get;}
+    public TextMeshProUGUI _name {set; get;}
+    public TextMeshProUGUI _length {set; get;}
 
     AudioClip audioClip;
     void Awake(){
         audioClip = gameObject.GetComponent<AnalyzingMusic>().audioClip;
-        Text[] musicInfoTexts = begin_board.GetComponentsInChildren<Text>();
+        TextMeshProUGUI[] musicInfoTexts = begin_board.GetComponentsInChildren<TextMeshProUGUI>();
         _name = musicInfoTexts[0];
         _length = musicInfoTexts[1];
 

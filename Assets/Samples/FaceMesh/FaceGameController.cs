@@ -156,11 +156,12 @@ public class FaceGameController : MonoBehaviour
                 break;
         }
 
-        if (note.NoteType == faceNoteType)
-        {
-            score += note.IsDone();
-        }
-
+        // if (note.NoteType == faceNoteType)
+        // {
+        //     score += note.IsDone();
+        // }
+        FaceNoteMovement res = player.CheckFaceNoteMatch(faceNoteType);
+        if(res != null) score += res.IsDone();
         return result;
     }
 

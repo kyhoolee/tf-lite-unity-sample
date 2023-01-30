@@ -43,21 +43,23 @@ public class StartPlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (!detected && Time.time - st >= 3f)
-        {
-            detected = true;
-            // Debug.Log("Detected Complete");
-            bg_face.gameObject.SetActive(false);
-            notice.gameObject.SetActive(false);
-            ready.gameObject.SetActive(true);
-        }
-        else if (detected && !readyIsDone)
+    {   
+        // Debug.Log("detected: " + detected);
+        if (detected && !readyIsDone)
         {
             readyIsDone = true;
             ready.gameObject.SetActive(true);
             Invoke(nameof(HasDoneReady), 5f);
         }
+        else if (faceIsInScreen && !readyIsDone && (Time.time - st >= 3f))
+        {
+            detected = true;
+            // Debug.Log("Detected Complete");
+            bg_face.gameObject.SetActive(false);
+            notice.gameObject.SetActive(false);
+            // ready.gameObject.SetActive(true);
+        }
+        
 
     }
 

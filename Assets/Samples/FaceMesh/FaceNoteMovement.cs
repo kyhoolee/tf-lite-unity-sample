@@ -5,7 +5,7 @@ public class FaceNoteMovement : MonoBehaviour
     private Rigidbody rb;
     public Vector3 forwardForce = new Vector3(0, 200f, 0);
     float positionYStart = -9f;
-    float positionYEnd = 1f;
+    float positionYEnd = 9f;
     [SerializeField] private FacePlayerMovement player;
     [SerializeField] private NoteState state = NoteState.Free;
     private SpriteRenderer spriteRenderer;
@@ -23,6 +23,9 @@ public class FaceNoteMovement : MonoBehaviour
     static int prevNoteType = -1;
     int scoreType = 0;
     float st = 0;
+    private float[] excellentScoreZone = { -0.5f, 1.5f };
+    private float[] greatScoreZone = { 1.5f, 3f };
+    private float[] coolScoreZone = { 3f, 9f };
     private void Awake()
     {
         // get object ridibody
@@ -33,7 +36,7 @@ public class FaceNoteMovement : MonoBehaviour
     }
 
     private void Start()
-    {   
+    {
         // this.state = NoteState.Used;
     }
     public void FixedUpdate()
@@ -45,7 +48,7 @@ public class FaceNoteMovement : MonoBehaviour
             this.gameObject.SetActive(false);
             this.state = NoteState.Free;
             player.NextNote();
-            Debug.Log(Time.time - st);
+            // Debug.Log(Time.time - st);
         }
     }
     int RandomSpiritIndex()
@@ -103,18 +106,28 @@ public class FaceNoteMovement : MonoBehaviour
 
     public int IsDone()
     {
+        /*
+        0: Excellent
+        1: Great
+        2: Cool
+        3: Ok
+        */
         if (state == NoteState.Used)
         {
             float posY = gameObject.transform.position.y;
-            if (posY > 1f)
-            {
-                scoreType = 1;
+            if(posY >= coolScoreZone[0]){
+                scoreType = 1;  // great
             }
-            else if (posY >= -0.5f && posY <= 1f)
+            else if (posY >= greatScoreZone[0] && posY < greatScoreZone[1])
             {
-                scoreType = 0;
+                scoreType = 2;  // cool
             }
-            else scoreType = 2;
+            else if (posY >= excellentScoreZone[0] && posY < excellentScoreZone[1])
+            {
+                scoreType = 0;  // excellent
+            }
+            else scoreType = 3; // ok
+
             DisableScoreAll();
             player.score[scoreType].gameObject.SetActive(true);
             Invoke(nameof(DisableScore), 1f);
