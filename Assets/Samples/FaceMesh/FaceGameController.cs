@@ -57,7 +57,6 @@ public class FaceGameController : MonoBehaviour
         if (Time.time > timeSpace)
         {
             timeSpace = Time.time + logicTimeRange;
-            FaceNoteMovement lastNode = player.GetNoteMovement();
             FaceMesh.Result faceMesh = faceMeshProcess.getFaceMeshResult();
             if (faceMesh != null)
             {   // 1. set color face mark following to recognition
@@ -69,13 +68,9 @@ public class FaceGameController : MonoBehaviour
                     // scoreText.text = "No-face";
                     startPlayerController.NotDetected();
                 }
-                else if (lastNode != null)
-                {
-                    faceNoteMatch(lastNode, faceMesh);
-                }
                 else
                 {
-                    //scoreText.text = "Next-note";
+                    faceNoteMatch(faceMesh);
                 }
             }
             else
@@ -92,7 +87,7 @@ public class FaceGameController : MonoBehaviour
         return (b) ? "T" : "F";
     }
 
-    private bool faceNoteMatch(FaceNoteMovement note, FaceMesh.Result face)
+    private bool faceNoteMatch(FaceMesh.Result face)
     {
         bool result = false;
 
@@ -156,10 +151,6 @@ public class FaceGameController : MonoBehaviour
                 break;
         }
 
-        // if (note.NoteType == faceNoteType)
-        // {
-        //     score += note.IsDone();
-        // }
         FaceNoteMovement res = player.CheckFaceNoteMatch(faceNoteType);
         if(res != null) score += res.IsDone();
         return result;
