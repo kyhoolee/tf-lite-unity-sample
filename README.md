@@ -76,7 +76,7 @@ There are a number of types of data it provides:
 • Volume
 ```
 
-###RhythmData
+### RhythmData
 
 - RhythmData has the following structure. A RhythmData can have several Tracks, each of which contains a collection of a specific type of Feature. Feature is the base type of information in a song. Each Feature has a timestamp and a length.
 
