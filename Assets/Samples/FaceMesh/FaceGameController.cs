@@ -16,8 +16,8 @@ public class FaceGameController : MonoBehaviour
     private StartPlayerController startPlayerController;
     public bool isGenerate = false;
     [SerializeField] private FaceGenerate faceGenerate;
-    float preH = -20;
-    float preW = -20;
+    private float preH = -20;
+    private float preW = -20;
 
     void Awake()
     {
@@ -159,8 +159,6 @@ public class FaceGameController : MonoBehaviour
 
     private Vector2 faceAngle(FaceMesh.Result face)
     {
-
-
         Vector3 center = face.keypoints[6];
         Vector3 left = face.keypoints[226];
         Vector3 right = face.keypoints[446];

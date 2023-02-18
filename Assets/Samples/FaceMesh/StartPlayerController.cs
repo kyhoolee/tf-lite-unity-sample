@@ -12,10 +12,10 @@ public class StartPlayerController : MonoBehaviour
     public Text notice { set; get; }
     public RectTransform Ready { get => ready; }
     public RectTransform FaceTemplate { get => faceTemplate; }
-    float st = 0f;
-    bool detected = false;
-    public bool readyIsDone = false;
-    bool faceIsInScreen = false;
+    private float st = 0f;
+    private bool detected = false;              // has detected in 3s
+    public bool readyIsDone = false;            // count is done
+    private bool faceIsInScreen = false;        // player is keep face in center
     [SerializeField] private AnalyzingMusic analyzingMusic;
     [SerializeField] private RectTransform recordNotice;
     private bool isChooseRecord = false;
@@ -45,7 +45,10 @@ public class StartPlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        //1. recording or not
+        //2. keep your face in 3s
+        //3. count to start
         if (isChooseRecord)
         {
             // Debug.Log("detected: " + detected);
@@ -95,9 +98,10 @@ public class StartPlayerController : MonoBehaviour
 
     }
 
-    public void Record(bool ok)
+    public void RecordBtn()
     {
         recordNotice.gameObject.SetActive(false);
         isChooseRecord = true;
+        // record method in button onclick inspector
     }
 }

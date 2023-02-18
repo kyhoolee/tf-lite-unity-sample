@@ -21,17 +21,22 @@ public class SongController : MonoBehaviour
     {
         btn = gameObject.GetComponentInChildren<Button>();
         btn.interactable = canPlay;
+        // click button to show charge power notice
         btn.onClick.AddListener(ChangeScene);
     }
-
+    /*
+        Display each song info of list
+    */
     public void Init(string num, string path, bool ok)
-    {
-        song.Path = path;
-        number.text = num;
+    {   // declare Song
         KeyValuePair<string, string> nameSongAndAuthor = GetInfo(path);
+        song.Path = path;
         song.SongName = nameSongAndAuthor.Key;
+        // display text
+        number.text = num;
         songName.text = song.SongName;
         author.text = nameSongAndAuthor.Value;
+        // check player is has star enough to play or not
         canPlay = ok;
     }
 
@@ -50,6 +55,7 @@ public class SongController : MonoBehaviour
     {
         string newName = "";
         string[] names = oldName.Split('_');
+        // upcase first character
         foreach (string name in names)
         {
             newName += char.ToUpper(name[0]) + name.Substring(1) + " ";
@@ -62,7 +68,9 @@ public class SongController : MonoBehaviour
         GameObject.Find("ChooseSongController").GetComponent<ListMusicsController>().ChargeNotice.gameObject.SetActive(true);
     }
 }
-
+/*
+    Song to contain filepath of song, name, and time
+*/
 class Song
 {
     private string path;

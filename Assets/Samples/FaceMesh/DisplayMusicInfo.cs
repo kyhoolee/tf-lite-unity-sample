@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using RhythmTool;
 using TMPro;
 
 public class DisplayMusicInfo : MonoBehaviour
@@ -17,7 +15,8 @@ public class DisplayMusicInfo : MonoBehaviour
     }
 
     public void SetInfo(AudioClip audioClip)
-    {
+    {   
+        // display name, time of song
         _name.text = audioClip.name;
         _length.text = SecToTime(audioClip.length);
     }

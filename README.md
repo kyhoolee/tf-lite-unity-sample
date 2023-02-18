@@ -29,15 +29,19 @@ Add the following items to your Unity project's `Packages/manifest.json`:
 ```
 
 ### Example Recording video
+
 Step 1: create a `VideoKitRecorder` component
 Step 2: call in scripts
+
 ```
 using NatML.VideoKit;
 
 (VideoRecorder) recorder.StartRecording(); // call to record video
 (VideoRecorder) recorder.Stop(); // call to stop recording video
 ```
+
 ### Example Streaming camera
+
 Step 1: create a `VideoKitCameraManager` component
 Step 2: create a UI raw image and attach a `VideoKitCameraView`
 
@@ -56,6 +60,10 @@ using TensorFlowLite;
 - Requirement: add `AudioImporter` on Assets Store
 
 ```markdown
+AudioImporter enables you to import audio files at runtime in Unity. It loads an audio file into an AudioClip. The package includes a simple file browser that can be used to select a file.
+```
+
+```markdown
 RhythmTool is a straightforward scripting package for Unity, with all the basic functionality for creating games that react to music.
 
 RhythmTool can analyze an entire song before playing it, or while it’s being played.
@@ -68,10 +76,106 @@ There are a number of types of data it provides:
 • Volume
 ```
 
+###RhythmData
 
+- RhythmData has the following structure. A RhythmData can have several Tracks, each of which contains a collection of a specific type of Feature. Feature is the base type of information in a song. Each Feature has a timestamp and a length.
+
+```
+using UnityEngine;
+
+public class AnalyzeExample : MonoBehaviour
+{
+    public RhythmAnalyzer analyzer;
+
+    public AudioClip audioClip;
+
+    public RhythmData rhythmData;
+
+    void Start ()
+    {
+        //Start analyzing a song.
+        rhythmData = analyzer.Analyze(audioClip);
+
+        //Find a track with Beats.
+        Track<Beat> track = rhythmData.GetTrack<Beat>();
+    }
+}
+```
+
+### Importing a Song
+
+```
+using UnityEngine;
+using RhythmTool;
+
+public class ImporterExample : MonoBehaviour
+{
+    public string path;
+    public AudioImporter importer;
+    public RhythmAnalyzer analyzer;
+
+    void Awake()
+    {
+        importer.Loaded += OnLoaded;
+        importer.Import(path);
+    }
+
+    private void OnLoaded(AudioClip clip)
+    {
+        analyzer.Analyze(clip);
+    }
+}
+```
+
+- In this project, we can use `RhythmPlayer` to interact with `AudioClip` such as Play, Stop or Pause, .e.t.c
+-
 
 ## Description
+### Entites
 
+- FaceNote
+  - Generate follow to music beat by using RhythmData to get Onset list, sponse it on timestamp.
+  - Using `Pooling Object` contain a number of pre-initialized `FaceNote`. When we need a FaceNote we just take in the pool and `setActive(true)` it, then after using it, we `setActive(false)` it.
+  - Position calculate by position of left-top and right-bottom
+  - FaceNote move from bot to top, init 0 velocity, update `fowardForce*1/50` per frame, speed change by `fowardForce`
+  - Movement of `FaceNote` is `FaceNoteMovement` script.
+
+- Player
+  - A list to contain all `FaceNote`.
+  - Per Frame we find in list a `FaceNote` match with `FaceResult` and remove it out of list.
+  - Container of list is `FacePlayerMovement`.
+
+- FaceGameController 
+  - Take player's face then detect by FaceMeshProcessor to get `FaceMesh.Result`.
+  - `FaceMesh.Result` has 468 points.
+  - Check player's face is match with `FaceNote` or not and update score.
+  - Scores are changed by position of `MatchZone`
+
+- FaceGenerate
+  - Contain the `PoolFaceNote`
+  - Initialize pool when game play start
+  - Random position `FaceNote`
+  - Method `Respawn()` to generate `FaceNote`
+
+- AnalyzingMusic
+  - Loading a song then analysis `RhythmData`.
+  - Play song in timestamp of first onset
+
+- SongController
+  - Contain name, author, path, time of song
+  - Method to parse name, author
+
+- DataSO
+  - Object to save data to using in different scenes.
+
+- ListMusicController
+  - Display list of song on screen.
+
+- StartPlayerController
+  - Check player show face in center
+
+- VideoRecorder
+  - Provide methods to record scene.
 # TensorFlow Lite for Unity Samples
 
 [![npm](https://img.shields.io/npm/v/com.github.asus4.tflite?label=npm)](https://www.npmjs.com/package/com.github.asus4.tflite)

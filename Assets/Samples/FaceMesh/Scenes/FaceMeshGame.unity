@@ -1102,7 +1102,6 @@ MonoBehaviour:
   topLeft: {fileID: 1076314843}
   bottomRight: {fileID: 1442064495}
   number_notes: 15
-  pooledNotes: []
 --- !u!1 &1051232094
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,75 +2409,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3059631084134964460}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2457552639456917893
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1291147826340145960, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_Name
-      value: ScoreKeeper
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 640
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6666762251663832875, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ffb1cfaaf90b2c54e894ff1b63b5e7eb, type: 3}
 --- !u!1001 &3059631084134964460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2619,7 +2549,7 @@ PrefabInstance:
     - target: {fileID: 3701408771390376645, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3701408771390376645, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
@@ -2649,7 +2579,7 @@ PrefabInstance:
     - target: {fileID: 3701408771390376645, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Record
+      value: RecordBtn
       objectReference: {fileID: 0}
     - target: {fileID: 3701408771390376645, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
@@ -2689,7 +2619,7 @@ PrefabInstance:
     - target: {fileID: 8618537969629365761, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8618537969629365761, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
@@ -2699,7 +2629,7 @@ PrefabInstance:
     - target: {fileID: 8618537969629365761, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Record
+      value: RecordBtn
       objectReference: {fileID: 0}
     - target: {fileID: 8618537969629365761, guid: 8352cae6b6bc8f149a35ecdd876ca2f9,
         type: 3}

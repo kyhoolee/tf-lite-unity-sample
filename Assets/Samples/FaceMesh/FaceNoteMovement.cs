@@ -21,7 +21,7 @@ public class FaceNoteMovement : MonoBehaviour
     [SerializeField] private int noteType = -1;
     public int NoteType { get => noteType; }
     static int prevNoteType = -1;
-    int scoreType = 0;
+    private int scoreType = 0;
     float st = 0;
     private float[] excellentScoreZone = { -0.5f, 1.5f };
     private float[] greatScoreZone = { 1.5f, 3f };
@@ -30,6 +30,7 @@ public class FaceNoteMovement : MonoBehaviour
     {
         // get object ridibody
         rb = GetComponent<Rigidbody>();
+        // initial state when Spawn()
         rb.rotation = Quaternion.identity;
         rb.velocity = new Vector3(0, 0, 0);
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -43,6 +44,7 @@ public class FaceNoteMovement : MonoBehaviour
     {
         // make note falling
         rb.velocity = forwardForce * 1 / 50;
+        // if note is out of sceen, disActive it and remove it out of list
         if (rb.transform.position.y > positionYEnd)
         {
             this.gameObject.SetActive(false);
@@ -112,8 +114,9 @@ public class FaceNoteMovement : MonoBehaviour
         2: Cool
         3: Ok
         */
+        // note is generated
         if (state == NoteState.Used)
-        {
+        {   // cal score by position
             float posY = gameObject.transform.position.y;
             if(posY >= coolScoreZone[0]){
                 scoreType = 1;  // great
@@ -127,21 +130,22 @@ public class FaceNoteMovement : MonoBehaviour
                 scoreType = 0;  // excellent
             }
             else scoreType = 3; // ok
-
+            // reupdate and display score highlight
             DisableScoreAll();
             player.score[scoreType].gameObject.SetActive(true);
             Invoke(nameof(DisableScore), 1f);
             gameObject.SetActive(false);
-
+            // remove have done note
             player.NextNote();
+            // return score
             return (scoreType == 1) ? 25 : ((scoreType == 0) ? 50 : 15);
         }
         return 0;
     }
-}
+} 
 enum NoteState
 {
-    Free,
-    Used,
+    Free,           // FaceNote is in the pool
+    Used,           // is generated
     Done
 }

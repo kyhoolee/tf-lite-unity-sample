@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class FacePlayerMovement : MonoBehaviour
 {
-    [SerializeField] private FaceGameController gameController;
     public RectTransform[] score;
-    // make queue to check note following order
+    // make list to contain all of note
     private List<FaceNoteMovement> q = new List<FaceNoteMovement>();
     
     public void AddNoteMovement(FaceNoteMovement noteMovement)

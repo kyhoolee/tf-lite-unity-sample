@@ -6,7 +6,6 @@ using System.Collections;
 
 namespace RhythmTool
 {
-
     public class AnalyzingMusic : MonoBehaviour
     {
         [SerializeField] private RhythmAnalyzer analyzer;
@@ -23,30 +22,32 @@ namespace RhythmTool
         [SerializeField] private DisplayMusicInfo displayMusicInfo;
         [SerializeField] private SongSO songOS;
 
-
         [System.Obsolete]
         void Awake()
         {
             onsets = new List<Onset>();
             // soundPath = "file://" + Application.streamingAssetsPath + "/Sound/";
             soundPath = songOS.Path.Replace("\\", "/");
+            // start loading audio
             StartCoroutine(LoadAudio());
         }
 
         [System.Obsolete]
         IEnumerator LoadAudio()
-        {
+        {   
+            //1. loading audio
             WWW request = GetAudioFromFile(soundPath, audioName);
             yield return request;
-
+            // 2. wait loading audio then assign to variables
             this.audioClip = request.GetAudioClip();
             audioClip.name = songOS.NameSong;
-
+            // 3. Analizing audio and display song info
             PlayAudioFile();
         }
 
         private void PlayAudioFile()
-        {
+        {   
+            // wait a minute to analyzing audio to rhythmData
             rhythmData = analyzer.Analyze(audioClip, 6);
             player.rhythmData = rhythmData;
             displayMusicInfo.SetInfo(audioClip);
@@ -56,6 +57,9 @@ namespace RhythmTool
         WWW GetAudioFromFile(string path, string filename)
         {
             // string audioToLoad = string.Format(path + "{0}", filename);
+            /*
+                1. using www to load audio from filename
+            */
             string audioToLoad = path;
             WWW request = new WWW(audioToLoad);
             return request;
@@ -84,6 +88,7 @@ namespace RhythmTool
             if (audioClip != null && player.audioSource.timeSamples == audioClip.samples)
             {
                 // Debug.Log("end");
+                // stoping record
                 if (recorder.status == VideoKitRecorder.Status.Recording)
                     recorder.StopRecording();
                 Invoke(nameof(SongA), 1f);
@@ -100,7 +105,7 @@ namespace RhythmTool
             player.Stop();
             //Clear the list.
             onsets.Clear();
-            //Find all beats for the part of the song that is currently playing.
+            //1. Find all beats for the part of the song that is currently playing.
             player.rhythmData.GetFeatures<Onset>(onsets, 0, audioClip.length);
 
             // float maxStrength = onsets.Max(x => x.strength);
@@ -113,11 +118,11 @@ namespace RhythmTool
 
             // Invoke(nameof(PlayerPlay), beats[0].timestamp + 1f);
             // 200ms : 10m-2.72s
+            // 2. play song on time of first onset
             Invoke(nameof(PlayerPlay), 2.72f - onsets[0].timestamp);
+            // 3. spawn FaceNote on time of onsets time
             for (int i = 0; i < onsets.Count; i++)
             {
-                // Debug.Log(onsets[i].timestamp + "  " + onsets[i].strength + " " + onsets[i].length);
-                // if (onsets[0].strength >= avg)
                 Invoke(nameof(SpawnOnset), onsets[i].timestamp);
             }
 
@@ -128,7 +133,8 @@ namespace RhythmTool
         }
 
         void SongA()
-        {
+        {   
+            // when song is end, change to ResultScene
             SceneManager.LoadScene("ResultScene", LoadSceneMode.Single);
         }
     }

@@ -7,12 +7,11 @@ using UnityEngine.UI;
 
 public class ChangeScenesController : MonoBehaviour
 {
-    [SerializeField] private GameObject resultCanvas;
     [SerializeField] private GameObject recordCanvas;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private Text scoreText;
     [SerializeField] private FloatSO scoreSO;
-    [SerializeField] private RawImage[] star;
+    [SerializeField] private RawImage[] star;   // list spirit star images
     void Awake()
     {
         videoPlayer.playOnAwake = false;
@@ -20,12 +19,13 @@ public class ChangeScenesController : MonoBehaviour
 
     void Start()
     {
-        // display star and score
+        // 1. display star and score
         star[StarScore(scoreSO.Value)].gameObject.SetActive(true);
         scoreText.text = scoreSO.Value.ToString();
-        // video record is have recorded
+
+        // 2. video record is have recorded
         string[] videoList = Directory.GetFiles(Directory.GetCurrentDirectory() + "/VideoKit");
-        videoPlayer.url = videoList[videoList.Length - 1];
+        videoPlayer.url = videoList[videoList.Length - 1];  // get lastest record video
     }
 
     public void ChangeScene(string name)
@@ -37,7 +37,6 @@ public class ChangeScenesController : MonoBehaviour
     {
         recordCanvas.SetActive(true);
         videoPlayer.Play();
-        // StartCoroutine(Play());
     }
 
     public void BackBtn()
@@ -46,15 +45,8 @@ public class ChangeScenesController : MonoBehaviour
         recordCanvas.SetActive(false);
     }
 
-    IEnumerator Play()
-    {
-
-        yield return new WaitForSecondsRealtime(1);
-
-        videoPlayer.Play();
-    }
-
     int StarScore(float score){
+        // display star follow score player had after play finish
         if(score <= 100){
             return 0;
         }
