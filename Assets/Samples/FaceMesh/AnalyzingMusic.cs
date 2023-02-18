@@ -1,37 +1,72 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.SceneManagement;
+using NatML.VideoKit;
+using System.Collections;
 
 namespace RhythmTool
 {
 
     public class AnalyzingMusic : MonoBehaviour
     {
-        public RhythmAnalyzer analyzer;
-        public RhythmPlayer player;
-        private RhythmEventProvider eventProvider;
+        [SerializeField] private RhythmAnalyzer analyzer;
+        [SerializeField] private RhythmPlayer player;
         [SerializeField] private FaceGameController faceGameController;
-        public AudioClip audioClip;
+        [SerializeField] private AudioClip audioClip;
+        public AudioClip AudioClip { set { audioClip = value; } get => audioClip; }
         private RhythmData rhythmData;
         private float prevTime;
         private List<Onset> onsets;
-        private List<Beat> beats;
-        private List<Value> values;
-        private List<Chroma> chromas;
+        [SerializeField] private VideoKitRecorder recorder;
+        private string soundPath;
+        private string audioName = "dubstep_evolution.mp3";
+        [SerializeField] private DisplayMusicInfo displayMusicInfo;
+        [SerializeField] private SongSO songOS;
 
+
+        [System.Obsolete]
         void Awake()
         {
             onsets = new List<Onset>();
-            beats = new List<Beat>();
-            // eventProvider = (RhythmEventProvider)player.targets[0];
+            // soundPath = "file://" + Application.streamingAssetsPath + "/Sound/";
+            soundPath = songOS.Path.Replace("\\", "/");
+            StartCoroutine(LoadAudio());
         }
+
+        [System.Obsolete]
+        IEnumerator LoadAudio()
+        {
+            WWW request = GetAudioFromFile(soundPath, audioName);
+            yield return request;
+
+            this.audioClip = request.GetAudioClip();
+            audioClip.name = songOS.NameSong;
+
+            PlayAudioFile();
+        }
+
+        private void PlayAudioFile()
+        {
+            rhythmData = analyzer.Analyze(audioClip, 6);
+            player.rhythmData = rhythmData;
+            displayMusicInfo.SetInfo(audioClip);
+        }
+
+        [System.Obsolete]
+        WWW GetAudioFromFile(string path, string filename)
+        {
+            // string audioToLoad = string.Format(path + "{0}", filename);
+            string audioToLoad = path;
+            WWW request = new WWW(audioToLoad);
+            return request;
+        }
+
 
         void Start()
         {
             // player.rhythmData.audioClip = audioClip;
-            rhythmData = analyzer.Analyze(audioClip, 6);
-            player.rhythmData = rhythmData;
+            // rhythmData = analyzer.Analyze(audioClip, 6);
+            // player.rhythmData = rhythmData;
             // Start analyzing a song
             //Find a track with Beats
             /*
@@ -46,6 +81,14 @@ namespace RhythmTool
         void Update()
         {
             // Get the current playback time of the AudioSource
+            if (audioClip != null && player.audioSource.timeSamples == audioClip.samples)
+            {
+                // Debug.Log("end");
+                if (recorder.status == VideoKitRecorder.Status.Recording)
+                    recorder.StopRecording();
+                Invoke(nameof(SongA), 1f);
+
+            }
 
         }
         void PlayerPlay()
@@ -56,14 +99,9 @@ namespace RhythmTool
         {
             player.Stop();
             //Clear the list.
-            beats.Clear();
             onsets.Clear();
             //Find all beats for the part of the song that is currently playing.
-            player.rhythmData.GetFeatures<Beat>(beats, 0, audioClip.length);
             player.rhythmData.GetFeatures<Onset>(onsets, 0, audioClip.length);
-            // player.rhythmData.GetFeatures<Value>(values, 0, audioClip.length);
-            // player.rhythmData.GetFeatures<Chroma>(chromas, 0, audioClip.length);
-
 
             // float maxStrength = onsets.Max(x => x.strength);
             // float minStrength = onsets.Min(x => x.strength);
@@ -75,7 +113,7 @@ namespace RhythmTool
 
             // Invoke(nameof(PlayerPlay), beats[0].timestamp + 1f);
             // 200ms : 10m-2.72s
-            Invoke(nameof(PlayerPlay), 2.72f -  onsets[0].timestamp);
+            Invoke(nameof(PlayerPlay), 2.72f - onsets[0].timestamp);
             for (int i = 0; i < onsets.Count; i++)
             {
                 // Debug.Log(onsets[i].timestamp + "  " + onsets[i].strength + " " + onsets[i].length);
@@ -87,6 +125,11 @@ namespace RhythmTool
         void SpawnOnset()
         {
             faceGameController.Spawn();
+        }
+
+        void SongA()
+        {
+            SceneManager.LoadScene("ResultScene", LoadSceneMode.Single);
         }
     }
 }

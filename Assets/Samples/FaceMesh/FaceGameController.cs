@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 using TensorFlowLite;
-using RhythmTool;
+
 public class FaceGameController : MonoBehaviour
 {
     float timeSpace = 0.00f;
@@ -10,7 +9,7 @@ public class FaceGameController : MonoBehaviour
     [SerializeField] private FacePlayerMovement player;
     public FacePlayerMovement Player { get => player; }
     [SerializeField] private Text scoreText;
-    int score = 0;
+    [SerializeField] private FloatSO scoreSO;
     [SerializeField] private FaceMeshProcessor faceMeshProcess;
     [SerializeField] private GameObject topLeft;
     [SerializeField] private GameObject bottomRight;
@@ -20,39 +19,23 @@ public class FaceGameController : MonoBehaviour
     float preH = -20;
     float preW = -20;
 
-    void DisableText()
-    {
-        scoreText.gameObject.SetActive(false);
-    }
-
-    void ChangeScore(int score)
-    {
-        scoreText.gameObject.SetActive(true);
-        // Update score
-
-        Invoke(nameof(DisableText), 0.5f);
-    }
-
-    void ReadyDone()
-    {
-        startPlayerController.Ready.gameObject.SetActive(false);
-        isGenerate = true;
-    }
-
     void Awake()
     {
         startPlayerController = gameObject.GetComponent<StartPlayerController>();
     }
 
     void Start()
-    {
-
+    {   
+        // start game reset score value to 0
+        scoreSO.Value = 0;
     }
 
     private void FixedUpdate()
-    {
+    {   
+        // generate face and update score
         faceGenerate.gameObject.SetActive(isGenerate);
-        scoreText.text = score.ToString();
+        scoreText.text = scoreSO.Value.ToString();
+
         // get press space time
         if (Time.time > timeSpace)
         {
@@ -81,7 +64,24 @@ public class FaceGameController : MonoBehaviour
         }
 
     }
+    void DisableText()
+    {
+        scoreText.gameObject.SetActive(false);
+    }
 
+    void ChangeScore(int score)
+    {
+        scoreText.gameObject.SetActive(true);
+        // Update score
+
+        Invoke(nameof(DisableText), 0.5f);
+    }
+
+    void ReadyDone()
+    {
+        startPlayerController.Ready.gameObject.SetActive(false);
+        isGenerate = true;
+    }
     string BoolToString(bool b)
     {
         return (b) ? "T" : "F";
@@ -152,7 +152,7 @@ public class FaceGameController : MonoBehaviour
         }
 
         FaceNoteMovement res = player.CheckFaceNoteMatch(faceNoteType);
-        if(res != null) score += res.IsDone();
+        if (res != null) scoreSO.Value += res.IsDone();
         return result;
     }
 

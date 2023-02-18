@@ -41,7 +41,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7626607496440885850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e66ac10bc4c3dd649a44ceb478f68780, type: 3}
+  m_Script: {fileID: 11500000, guid: 43f16e0cc04acfa4986c2a43c66654d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
+  faceNotePrefab: {fileID: 0}
+  topLeft: {fileID: 0}
+  bottomRight: {fileID: 0}
+  number_notes: 15
+  pooledNotes: []

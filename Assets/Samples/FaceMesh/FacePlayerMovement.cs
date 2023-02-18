@@ -7,7 +7,7 @@ public class FacePlayerMovement : MonoBehaviour
     [SerializeField] private FaceGameController gameController;
     public RectTransform[] score;
     // make queue to check note following order
-    List<FaceNoteMovement> q = new List<FaceNoteMovement>();
+    private List<FaceNoteMovement> q = new List<FaceNoteMovement>();
     
     public void AddNoteMovement(FaceNoteMovement noteMovement)
     {
@@ -33,6 +33,7 @@ public class FacePlayerMovement : MonoBehaviour
     {
         return q.Count();
     }
+    
     public FaceNoteMovement CheckFaceNoteMatch(int noteType){
         FaceNoteMovement res = null;
         for(int i = 0; i < q.Count(); i++){
